@@ -32,10 +32,10 @@ export function HomePricing({ sx, ...other }) {
 
   const renderDescription = (
     <SectionTitle
-      caption="plans"
-      title="Transparent"
-      txtGradient="pricing"
-      description="Choose from flexible pricing options designed to fit your business needs and budget with no hidden fees."
+      caption="Planes"
+      title="Soluciones flexibles"
+      txtGradient="para tu negocio"
+      description="Elige el plan que mejor se adapte a las necesidades de tu empresa. Desde startups hasta grandes corporativos, tenemos la solución ideal."
       sx={{ mb: 8, textAlign: 'center' }}
     />
   );
@@ -149,32 +149,30 @@ function PlanCard({ plan, sx, ...other }) {
     >
       {plusLicense && renderLines}
 
-      <Stack direction="row" alignItems="center">
-        <Stack flexGrow={1}>
-          <m.div variants={varFade({ distance: 24 }).inLeft}>
-            <Typography variant="h4" component="h6">
-              {plan.license}
-            </Typography>
-          </m.div>
+      <Stack spacing={3}>
+        <m.div variants={varFade({ distance: 24 }).inLeft}>
+          <Typography variant="h4" component="h6">
+            {plan.license}
+          </Typography>
+        </m.div>
 
-          <m.div variants={varScale({ distance: 24 }).inX}>
-            <Box
-              sx={{
-                width: 32,
-                height: 6,
-                opacity: 0.24,
-                borderRadius: 1,
-                bgcolor: 'error.main',
-                ...(standardLicense && { bgcolor: 'primary.main' }),
-                ...(plusLicense && { bgcolor: 'secondary.main' }),
-              }}
-            />
-          </m.div>
-        </Stack>
+        <m.div variants={varScale({ distance: 24 }).inX}>
+          <Box
+            sx={{
+              width: 32,
+              height: 6,
+              opacity: 0.24,
+              borderRadius: 1,
+              bgcolor: 'error.main',
+              ...(standardLicense && { bgcolor: 'primary.main' }),
+              ...(plusLicense && { bgcolor: 'secondary.main' }),
+            }}
+          />
+        </m.div>
 
         <m.div variants={varFade({ distance: 24 }).inLeft}>
-          <Box component="span" sx={{ typography: 'h3' }}>
-            ${plan.price}
+          <Box component="span" sx={{ typography: 'h3', textAlign: 'center' }}>
+            {plan.price}
           </Box>
         </m.div>
       </Stack>
@@ -253,9 +251,9 @@ function PlanCard({ plan, sx, ...other }) {
           size="large"
           target="_blank"
           rel="noopener"
-          href={paths.minimalStore}
+          href={paths.contact}
         >
-          Get started
+          Solicitar Información
         </Button>
       </m.div>
     </Stack>
@@ -264,25 +262,71 @@ function PlanCard({ plan, sx, ...other }) {
 
 // ----------------------------------------------------------------------
 
-const PLANS = [...Array(3)].map((_, index) => ({
-  license: ['Standard', 'Plus', 'Extended'][index],
-  price: [69, 129, 599][index],
-  commons: [
-    'One end products',
-    '12 months updates',
-    '6 months of support',
-    'One-time payments',
-    'Lifetime perpetual license.',
-  ],
-  options: [
-    'JavaScript version',
-    'TypeScript version',
-    'Design resources (Figma)',
-    'Commercial applications',
-  ],
-  icons: [
-    `${CONFIG.site.basePath}/assets/icons/platforms/ic-js.svg`,
-    `${CONFIG.site.basePath}/assets/icons/platforms/ic-ts.svg`,
-    `${CONFIG.site.basePath}/assets/icons/platforms/ic-figma.svg`,
-  ],
-}));
+const PLANS = [
+  {
+    license: 'Básico',
+    price: '$2,500/mes',
+    commons: [
+      'Hasta 100 m² de almacenamiento',
+      'Gestión básica de inventario',
+      'Reportes mensuales',
+      'Entregas programadas',
+      'Soporte por email',
+    ],
+    options: [
+      'Integración ERP básica',
+      'Empaque estándar',
+      'Distribución local',
+      'Seguro incluido',
+    ],
+    icons: [
+      `${CONFIG.site.basePath}/assets/icons/platforms/ic-js.svg`,
+      `${CONFIG.site.basePath}/assets/icons/platforms/ic-ts.svg`,
+      `${CONFIG.site.basePath}/assets/icons/platforms/ic-figma.svg`,
+    ],
+  },
+  {
+    license: 'Profesional',
+    price: '$5,500/mes',
+    commons: [
+      'Hasta 500 m² de almacenamiento',
+      'Gestión avanzada de inventario',
+      'Reportes semanales en tiempo real',
+      'Entregas express disponibles',
+      'Soporte telefónico prioritario',
+    ],
+    options: [
+      'Integración ERP completa',
+      'Empaque personalizado',
+      'Distribución regional',
+      'Control de temperatura',
+    ],
+    icons: [
+      `${CONFIG.site.basePath}/assets/icons/platforms/ic-js.svg`,
+      `${CONFIG.site.basePath}/assets/icons/platforms/ic-ts.svg`,
+      `${CONFIG.site.basePath}/assets/icons/platforms/ic-figma.svg`,
+    ],
+  },
+  {
+    license: 'Enterprise',
+    price: '$12,000/mes',
+    commons: [
+      'Espacio de almacenamiento ilimitado',
+      'Sistema de inventario personalizado',
+      'Dashboard ejecutivo en tiempo real',
+      'Servicio de entregas 24/7',
+      'Gerente de cuenta dedicado',
+    ],
+    options: [
+      'Integración total con tus sistemas',
+      'Servicios logísticos especializados',
+      'Distribución nacional e internacional',
+      'Certificaciones industriales',
+    ],
+    icons: [
+      `${CONFIG.site.basePath}/assets/icons/platforms/ic-js.svg`,
+      `${CONFIG.site.basePath}/assets/icons/platforms/ic-ts.svg`,
+      `${CONFIG.site.basePath}/assets/icons/platforms/ic-figma.svg`,
+    ],
+  },
+];

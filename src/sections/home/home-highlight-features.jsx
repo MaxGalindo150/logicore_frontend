@@ -49,7 +49,7 @@ export function HomeHighlightFeatures({ sx, ...other }) {
             alignItems={{ xs: 'center', md: 'flex-start' }}
             sx={{ textAlign: { xs: 'center', md: 'left' } }}
           >
-            <SectionTitle caption="App Features" title="Highlight" txtGradient="features" />
+            <SectionTitle caption="Nuestra Propuesta" title="¿Por qué elegir" txtGradient="LogiCore?" />
 
             <SvgIcon
               component={m.svg}
@@ -223,27 +223,22 @@ function Item({ item, sx, ...other }) {
 
 const ITEMS = [
   {
-    title: 'Dark mode',
-    subtitle: 'A dark theme that feels easier on the eyes.',
-    icon: 'solar:cloudy-moon-bold-duotone',
+    title: 'Enfócate en tu negocio principal',
+    subtitle: 'Nosotros manejamos eficientemente tu logística mientras tú te concentras en hacer crecer tu empresa.',
+    icon: 'solar:target-bold-duotone',
     imgUrl: [`${CONFIG.site.basePath}/assets/images/home/highlight-darkmode.webp`],
   },
   {
-    title: 'Color presets',
-    subtitle: 'Express your own style with just one click.',
-    icon: 'solar:pallete-2-bold-duotone',
+    title: 'Reducción de costos operativos',
+    subtitle: 'Elimina la necesidad de invertir en infraestructura propia y reduce significativamente tus gastos logísticos.',
+    icon: 'solar:dollar-minimalistic-bold-duotone',
     imgUrl: [
-      `${CONFIG.site.basePath}/assets/images/home/highlight-presets-1.webp`,
-      `${CONFIG.site.basePath}/assets/images/home/highlight-presets-2.webp`,
-      `${CONFIG.site.basePath}/assets/images/home/highlight-presets-3.webp`,
-      `${CONFIG.site.basePath}/assets/images/home/highlight-presets-4.webp`,
-      `${CONFIG.site.basePath}/assets/images/home/highlight-presets-5.webp`,
-    ],
+      `${CONFIG.site.basePath}/assets/images/home/highlight-presets-1.webp`],
   },
   {
-    title: 'Right-to-left',
-    subtitle: 'Support languages such as Arabic, Persian, and Hebrew.',
-    icon: 'solar:align-right-bold-duotone',
+    title: 'Mejores tiempos de respuesta',
+    subtitle: 'Optimizamos tu cadena de suministro para llegar más rápido al mercado zacatecano y regiones circundantes.',
+    icon: 'solar:clock-circle-bold-duotone',
     imgUrl: [`${CONFIG.site.basePath}/assets/images/home/highlight-rtl.webp`],
   },
 ];

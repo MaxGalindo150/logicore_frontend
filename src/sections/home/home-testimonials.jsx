@@ -57,9 +57,9 @@ export function HomeTestimonials({ sx, ...other }) {
 
   const renderDescription = (
     <SectionTitle
-      caption="testimonials"
-      title="Rumors are flying"
-      txtGradient="that..."
+      caption="Testimonios"
+      title="Lo que dicen nuestros"
+      txtGradient="clientes"
       sx={{ mb: { xs: 5, md: 8 }, textAlign: 'center' }}
     />
   );
@@ -151,9 +151,9 @@ export function HomeTestimonials({ sx, ...other }) {
 
       <Stack spacing={5} direction={{ xs: 'column', md: 'row' }} divider={verticalDivider}>
         {[
-          { label: 'Purchased order', value: 12.121 },
-          { label: 'Happy customers', value: 160 },
-          { label: 'Review rate', value: 4.9 },
+          { label: 'Empresas atendidas', value: 100 },
+          { label: 'Productos almacenados', value: 50.000 },
+          { label: 'Satisfacción del cliente', value: 4.8 },
         ].map((item) => (
           <Stack key={item.label} spacing={2} sx={{ textAlign: 'center', width: 1 }}>
             <m.div variants={varFade({ distance: 24 }).inUp}>
@@ -221,53 +221,53 @@ const base = (index) => ({
 const TESTIMONIALS = [
   {
     ...base(1),
-    category: 'Design Quality',
-    content: `The quality of this template is very good, the TypeScript files are neat and the communication with the team behind this template is very good! I would recommend this template for any kind of project, as they implement new features every now and then and enhance their design. I will definitely be using more templates from this team and re-purchasing this template for other projects.`,
-    postedAt: 'April 20, 2024 23:15:30',
+    category: 'Sector Manufacturero',
+    content: `LogiCore nos permitió enfocar todos nuestros recursos en la producción. Ya no nos preocupamos por el almacenamiento ni la distribución. Su sistema de gestión de inventarios es impecable y los reportes nos ayudan a tomar mejores decisiones.`,
+    postedAt: 'Agosto 15, 2024 10:30:00',
   },
   {
     ...base(2),
-    category: 'Design Quality',
-    content: `Amazing. I've never purchased complete front ends before, but I'll definitely be doing this again!`,
-    postedAt: 'March 19, 2024 23:15:30',
+    category: 'E-commerce',
+    content: `Increíble servicio. Desde que trabajamos con LogiCore, nuestros tiempos de entrega se redujeron a la mitad y las devoluciones se procesan mucho más rápido. ¡Definitivamente lo recomendaría!`,
+    postedAt: 'Julio 22, 2024 14:15:00',
   },
   {
     ...base(3),
-    category: 'Code Quality',
-    content: `Clean & Complete (Design & Code). Thansk Minimal team :)`,
-    postedAt: 'April 19, 2023 23:15:30',
+    category: 'Distribución',
+    content: `El equipo de LogiCore es muy profesional. Su servicio de almacenamiento inteligente y la integración con nuestro sistema ERP nos ahorró mucho tiempo y dinero.`,
+    postedAt: 'Junio 10, 2024 09:45:00',
   },
   {
     ...base(4),
-    category: 'Customer Support',
-    content: `Thanks to Minimal for customer support with email. I solved the problem. And the code quality is good, too.`,
-    postedAt: 'May 19, 2023 23:15:30',
+    category: 'Sector Agrícola',
+    content: `Gracias a LogiCore pudimos expandir nuestro negocio sin invertir en infraestructura. Su manejo especializado de productos agrícolas es excelente.`,
+    postedAt: 'Mayo 18, 2024 16:20:00',
   },
   {
     ...base(5),
-    category: 'Customer Support',
+    category: 'Startup',
     content:
-      'Great UI kit, really beautiful as well. Also the customer support is very warm-hearted. However, I hope the components and themes can be provided as a separated project (package).',
-    postedAt: 'June 19, 2023 23:15:30',
+      'Como startup, LogiCore fue clave para nuestro crecimiento. Nos proporcionaron una solución logística completa desde el primer día, permitiéndonos competir con empresas más grandes.',
+    postedAt: 'Abril 25, 2024 11:10:00',
   },
   {
     ...base(6),
-    category: 'Design Quality',
-    content: 'I would never have been able to create all these beautifull components myself!',
-    postedAt: 'July 19, 2023 23:15:30',
+    category: 'Comercio Local',
+    content: 'Nunca hubiera podido manejar toda la logística por mi cuenta. LogiCore me dio la tranquilidad de saber que mis productos están en buenas manos.',
+    postedAt: 'Marzo 12, 2024 13:30:00',
   },
   {
     ...base(7),
-    category: 'Code Quality',
+    category: 'Sector Minero',
     content:
-      'The quality of this template is excellent. However, as an individual, the cost of obtaining the TypeScript Source version is beyond my means. Despite my strong desire to acquire it, my limited personal budget does not allow me to do so.',
-    postedAt: 'August 19, 2023 23:15:30',
+      'El manejo especializado de LogiCore para productos industriales es excelente. Su capacidad para gestionar inventarios complejos y entregas a sitios remotos es impresionante.',
+    postedAt: 'Febrero 08, 2024 08:45:00',
   },
   {
     ...base(8),
-    category: 'Customizability',
+    category: 'Tecnología',
     content:
-      'The design and code quality are impressive. Regular updates and excellent customer support are major advantages.',
-    postedAt: 'September 19, 2023 23:15:30',
+      'La integración de LogiCore con nuestros sistemas fue perfecta. Su tecnología avanzada y el excelente servicio al cliente son ventajas importantes para nuestro negocio.',
+    postedAt: 'Enero 15, 2024 15:20:00',
   },
 ];

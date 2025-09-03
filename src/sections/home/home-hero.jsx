@@ -70,7 +70,7 @@ export function HomeHero({ sx, ...other }) {
         }}
       >
         <Box component="span" sx={{ width: 1, opacity: 0.24 }}>
-          Bienveni
+          Soluciones Logísticas
         </Box>
         <Box
           component={m.span}
@@ -89,7 +89,7 @@ export function HomeHero({ sx, ...other }) {
             ml: { xs: 0.75, md: 1, xl: 1.5 },
           }}
         >
-          IACGroup
+          LogiCore
         </Box>
       </Box>
     </MInview>
@@ -101,11 +101,13 @@ export function HomeHero({ sx, ...other }) {
         variant="body2"
         sx={{
           mx: 'auto',
+          maxWidth: 600,
+          textAlign: 'center',
           [theme.breakpoints.up(smKey)]: { whiteSpace: 'pre' },
           [theme.breakpoints.up(lgKey)]: { fontSize: 20, lineHeight: '36px' },
         }}
       >
-        {`Simplify communication \nSupercharge productivity`}
+        {`Proveedor integral de servicios de almacenamiento y distribución en Zacatecas \nOptimiza tu cadena de suministro sin invertir en infraestructura propia`}
       </Typography>
     </MInview>
   );
@@ -129,7 +131,7 @@ export function HomeHero({ sx, ...other }) {
             />
           ))}
         </AvatarGroup>
-        5000+ Happy employees
+        100+ Empresas confían en nosotros
       </Box>
     </MInview>
   );

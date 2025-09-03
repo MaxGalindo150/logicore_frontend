@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import { CONFIG } from 'src/config-global';
 import { varAlpha, stylesMode } from 'src/theme/styles';
 
+import { Iconify } from 'src/components/iconify';
 import { SvgColor } from 'src/components/svg-color';
 import { varFade, MotionViewport } from 'src/components/animate';
 
@@ -31,8 +32,8 @@ export function HomeMinimal({ sx, ...other }) {
   const renderDescription = (
     <>
       <SectionTitle
-        caption="Visualizing Success"
-        title="Qué es "
+        caption="Servicios Integrales"
+        title="¿Qué ofrecemos en "
         txtGradient="LogiCore?"
         sx={{ mb: { xs: 5, md: 8 }, textAlign: { xs: 'center', md: 'left' } }}
       />
@@ -52,7 +53,7 @@ export function HomeMinimal({ sx, ...other }) {
             gap={3}
             display="flex"
           >
-            <SvgColor src={item.icon} sx={{ width: 40, height: 40 }} />
+            <Iconify icon={item.icon} sx={{ width: 40, height: 40, color: 'primary.main' }} />
             <Stack spacing={1}>
               <Typography variant="h5" component="h6">
                 {item.title}
@@ -134,18 +135,18 @@ export function HomeMinimal({ sx, ...other }) {
 
 const ITEMS = [
   {
-    icon: `${CONFIG.site.basePath}/assets/icons/home/ic-make-brand.svg`,
-    title: 'Branding',
-    description: 'Consistent design makes it easy to brand your own.',
+    icon: 'solar:buildings-2-bold-duotone',
+    title: 'Almacenamiento Inteligente',
+    description: 'Gestión profesional de inventarios con sistemas digitales, almacenaje seguro y espacios flexibles adaptados a tus necesidades.',
   },
   {
-    icon: `${CONFIG.site.basePath}/assets/icons/home/ic-design.svg`,
-    title: 'UI & UX design',
-    description: 'The kit is built on the principles of the atomic design system.',
+    icon: 'solar:delivery-bold-duotone',
+    title: 'Distribución y Logística',
+    description: 'Red de distribución local y regional desde Zacatecas con entregas programadas y gestión de última milla para e-commerce.',
   },
   {
-    icon: `${CONFIG.site.basePath}/assets/icons/home/ic-development.svg`,
-    title: 'Development',
-    description: 'Easy to customize and extend, saving you time and money.',
+    icon: 'solar:box-bold-duotone',
+    title: 'Servicios de Valor Agregado',
+    description: 'Empaque y etiquetado personalizado, gestión de devoluciones e integración con sistemas ERP del cliente.',
   },
 ];
