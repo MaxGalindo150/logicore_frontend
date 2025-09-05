@@ -40,6 +40,7 @@
     "dayjs": "^1.11.11",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^11.2.10",
+    "i18next": "^25.4.2",
     "next": "^14.2.4",
     "nprogress": "^0.2.0",
     "react": "^18.3.1",
@@ -48,6 +49,7 @@
     "simplebar-react": "^3.2.5",
     "stylis": "^4.3.2",
     "stylis-plugin-rtl": "^2.1.1",
+    "swr": "^2.3.6",
     "zod": "^3.23.8"
   },
   "devDependencies": {

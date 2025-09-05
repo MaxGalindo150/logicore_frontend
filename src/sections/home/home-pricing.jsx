@@ -28,7 +28,7 @@ import { FloatLine, FloatXIcon } from './components/svg-elements';
 export function HomePricing({ sx, ...other }) {
   const theme = useTheme();
 
-  const tabs = useTabs('Standard');
+  const tabs = useTabs('Básico');
 
   const renderDescription = (
     <SectionTitle
