@@ -8,37 +8,17 @@ import { layoutClasses } from 'src/layouts/classes';
 export function Main({ sx, children, layoutQuery, ...other }) {
   const theme = useTheme();
 
-  return (
-    <Box
-      component="main"
-      className={layoutClasses.main}
-      sx={{
-        display: 'flex',
-        flex: '1 1 auto',
-        flexDirection: 'column',
-        [theme.breakpoints.up(layoutQuery)]: {
-          flexDirection: 'row',
-        },
-        ...sx,
-      }}
-      {...other}
-    >
-      {children}
-    </Box>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-export function Content({ sx, children, layoutQuery, ...other }) {
-  const theme = useTheme();
-
   const renderContent = (
     <Box
       sx={{
+        py: 5,
+        px: 3,
         width: 1,
+        borderRadius: 2,
         display: 'flex',
         flexDirection: 'column',
+        bgcolor: 'background.default',
+        boxShadow: theme.customShadows.card,
         maxWidth: 'var(--layout-auth-content-width)',
       }}
     >
@@ -48,10 +28,12 @@ export function Content({ sx, children, layoutQuery, ...other }) {
 
   return (
     <Box
-      className={layoutClasses.content}
+      component="main"
+      className={layoutClasses.main}
       sx={{
         px: 2,
         py: 5,
+        zIndex: 9,
         display: 'flex',
         flex: '1 1 auto',
         alignItems: 'center',

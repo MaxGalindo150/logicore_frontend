@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
+import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -19,8 +20,9 @@ import { RouterLink } from 'src/routes/components';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
-import { Iconify } from 'src/components/iconify';
+import { AnimateLogo2 } from 'src/components/animate';
 import { Form, Field } from 'src/components/hook-form';
+import { Iconify, SocialIcon } from 'src/components/iconify';
 
 import { useAuthContext } from 'src/auth/hooks';
 import { signInWithPassword } from 'src/auth/context/jwt';
@@ -40,7 +42,7 @@ export const SignInSchema = zod.object({
 
 // ----------------------------------------------------------------------
 
-export function JwtSignInView() {
+export function CenteredSignInView() {
   const router = useRouter();
 
   const { checkUserSession } = useAuthContext();
@@ -69,32 +71,34 @@ export function JwtSignInView() {
       await signInWithPassword({ email: data.email, password: data.password });
       await checkUserSession?.();
 
-      router.refresh();
+      router.push(paths.dashboard.root)
     } catch (error) {
       console.error(error);
       setErrorMsg(error instanceof Error ? error.message : error);
     }
   });
 
-  const renderHead = (
-    <Stack spacing={1.5} sx={{ mb: 5 }}>
-      <Typography variant="h5">Sign in to your account</Typography>
+  const renderLogo = <AnimateLogo2 sx={{ mb: 3, mx: 'auto' }} />;
 
-      <Stack direction="row" spacing={0.5}>
+  const renderHead = (
+    <Stack alignItems="center" spacing={1.5} sx={{ mb: 5 }}>
+      <Typography variant="h5">Ingresa a tu cuenta</Typography>
+
+      {/* <Stack direction="row" spacing={0.5}>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {`Don't have an account?`}
+          {`¿No tienes una cuenta?`}
         </Typography>
 
-        <Link component={RouterLink} href={paths.auth.jwt.signUp} variant="subtitle2">
-          Get started
+        <Link component={RouterLink} href={paths.authDemo.centered.signUp} variant="subtitle2">
+          Comenzar
         </Link>
-      </Stack>
+      </Stack> */}
     </Stack>
   );
 
   const renderForm = (
     <Stack spacing={3}>
-      <Field.Text name="email" label="Email address" InputLabelProps={{ shrink: true }} />
+      <Field.Text name="email" label="Correo electrónico" InputLabelProps={{ shrink: true }} />
 
       <Stack spacing={1.5}>
         <Link
@@ -104,13 +108,13 @@ export function JwtSignInView() {
           color="inherit"
           sx={{ alignSelf: 'flex-end' }}
         >
-          Forgot password?
+          ¿Olvidaste tu contraseña?
         </Link>
 
         <Field.Text
           name="password"
-          label="Password"
-          placeholder="6+ characters"
+          label="Contraseña"
+          placeholder="6+ caracteres"
           type={password.value ? 'text' : 'password'}
           InputLabelProps={{ shrink: true }}
           InputProps={{
@@ -132,15 +136,17 @@ export function JwtSignInView() {
         type="submit"
         variant="contained"
         loading={isSubmitting}
-        loadingIndicator="Sign in..."
+        loadingIndicator="Ingresando..."
       >
-        Sign in
+        Iniciar sesión
       </LoadingButton>
     </Stack>
   );
 
   return (
     <>
+      {renderLogo}
+
       {renderHead}
 
       <Alert severity="info" sx={{ mb: 3 }}>

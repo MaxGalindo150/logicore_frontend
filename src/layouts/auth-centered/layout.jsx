@@ -4,24 +4,26 @@ import Alert from '@mui/material/Alert';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
-import { Section } from './section';
-import { Main, Content } from './main';
+import { CONFIG } from 'src/config-global';
+import { stylesMode } from 'src/theme/styles';
+
+import { Main } from './main';
 import { HeaderBase } from '../core/header-base';
 import { LayoutSection } from '../core/layout-section';
 
 // ----------------------------------------------------------------------
 
-export function AuthSplitLayout({ sx, section, children }) {
+export function AuthCenteredLayout({ sx, children }) {
   const mobileNavOpen = useBoolean();
 
   const layoutQuery = 'md';
 
   return (
     <LayoutSection
+      /** **************************************
+       * Header
+       *************************************** */
       headerSection={
-        /** **************************************
-         * Header
-         *************************************** */
         <HeaderBase
           disableElevation
           layoutQuery={layoutQuery}
@@ -55,20 +57,27 @@ export function AuthSplitLayout({ sx, section, children }) {
       /** **************************************
        * Style
        *************************************** */
-      sx={sx}
       cssVars={{
         '--layout-auth-content-width': '420px',
       }}
+      sx={{
+        '&::before': {
+          width: 1,
+          height: 1,
+          zIndex: 1,
+          content: "''",
+          opacity: 0.24,
+          position: 'fixed',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center center',
+          backgroundImage: `url(${CONFIG.site.basePath}/assets/background/background-3-blur.webp)`,
+          [stylesMode.dark]: { opacity: 0.08 },
+        },
+        ...sx,
+      }}
     >
-      <Main layoutQuery={layoutQuery}>
-        <Section
-          title={section?.title}
-          layoutQuery={layoutQuery}
-          imgUrl={section?.imgUrl}
-          subtitle={section?.subtitle}
-        />
-        <Content layoutQuery={layoutQuery}>{children}</Content>
-      </Main>
+      <Main layoutQuery={layoutQuery}>{children}</Main>
     </LayoutSection>
   );
 }
