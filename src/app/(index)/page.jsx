@@ -3,9 +3,9 @@ import { HomeView } from 'src/sections/home/view';
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'Minimals UI: The starting point for your next project',
+  title: 'LogiCore - Sistema de Gestión Logística',
   description:
-    'The starting point for your next project with Minimal UI Kit, built on the newest version of Material-UI ©, ready to be customized to your style',
+    'Plataforma integral para la gestión logística y control de inventarios. Optimiza tu cadena de suministro con LogiCore.',
 };
 
 export default function Page() {

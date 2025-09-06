@@ -20,21 +20,21 @@ import { SocialIcon } from 'src/components/iconify';
 
 const LINKS = [
   {
-    headline: 'Minimal',
+    headline: 'LogiCore',
     children: [
-      { name: 'About us', href: paths.about },
-      { name: 'Contact us', href: paths.contact },
-      { name: 'FAQs', href: paths.faqs },
+      { name: 'Nosotros', href: paths.about },
+      { name: 'Contacto', href: paths.contact },
+      { name: 'Preguntas frecuentes', href: paths.faqs },
     ],
   },
   {
     headline: 'Legal',
     children: [
-      { name: 'Terms and condition', href: '#' },
-      { name: 'Privacy policy', href: '#' },
+      { name: 'Términos y condiciones', href: '#' },
+      { name: 'Política de privacidad', href: '#' },
     ],
   },
-  { headline: 'Contact', children: [{ name: 'support@minimals.cc', href: '#' }] },
+  { headline: 'Contacto', children: [{ name: 'soporte@logicore.com', href: '#' }] },
 ];
 
 // ----------------------------------------------------------------------
@@ -73,8 +73,8 @@ export function Footer({ layoutQuery, sx }) {
                 [theme.breakpoints.up(layoutQuery)]: { mx: 'unset' },
               }}
             >
-              The starting point for your next project with Minimal UI Kit, built on the newest
-              version of Material-UI ©, ready to be customized to your style.
+              Plataforma integral de gestión logística que optimiza tu cadena de suministro
+              y control de inventarios para maximizar la eficiencia operativa.
             </Typography>
 
             <Stack
@@ -159,8 +159,8 @@ export function HomeFooter({ sx }) {
         <Logo />
         <Box sx={{ mt: 1, typography: 'caption' }}>
           © All rights reserved.
-          <br /> made by
-          <Link href="https://minimals.cc/"> EigenCore </Link>
+          <br /> desarrollado por
+          <Link href="#"> LogiCore Team </Link>
         </Box>
       </Container>
     </Box>
