@@ -16,6 +16,23 @@ import { AuthProvider } from 'src/auth/context/jwt';
 
 // ----------------------------------------------------------------------
 
+export const metadata = {
+  title: 'LogiCore',
+  description: 'Sistema de gestión logística integral',
+  keywords: ['logística', 'gestión', 'transporte', 'inventario'],
+  authors: [{ name: 'LogiCore Team' }],
+  openGraph: {
+    title: 'LogiCore',
+    description: 'Sistema de gestión logística integral',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'LogiCore',
+    description: 'Sistema de gestión logística integral',
+  },
+};
+
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
