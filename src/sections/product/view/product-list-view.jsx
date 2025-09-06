@@ -45,10 +45,6 @@ import {
 
 // ----------------------------------------------------------------------
 
-const PUBLISH_OPTIONS = [
-  { value: 'published', label: 'Published' },
-  { value: 'draft', label: 'Draft' },
-];
 
 const HIDE_COLUMNS = { category: false };
 
@@ -63,7 +59,7 @@ export function ProductListView() {
 
   const { products, productsLoading } = useGetProducts();
 
-  const filters = useSetState({ publish: [], stock: [] });
+  const filters = useSetState({ stock: [] });
 
   const [tableData, setTableData] = useState([]);
 
@@ -79,7 +75,7 @@ export function ProductListView() {
     }
   }, [products]);
 
-  const canReset = filters.state.publish.length > 0 || filters.state.stock.length > 0;
+  const canReset = filters.state.stock.length > 0;
 
   const dataFiltered = applyFilter({ inputData: tableData, filters: filters.state });
 
@@ -137,7 +133,7 @@ export function ProductListView() {
       field: 'name',
       headerName: 'Producto',
       flex: 1,
-      minWidth: 360,
+      minWidth: 320,
       hideable: false,
       renderCell: (params) => (
         <RenderCellProduct params={params} onViewRow={() => handleViewRow(params.row.id)} />
@@ -147,9 +143,9 @@ export function ProductListView() {
       field: 'description',
       headerName: 'Descripción',
       flex: 1,
-      minWidth: 240,
+      minWidth: 260,
       filterable: false,
-      renderCell: (params) => <span>{params.value}</span>,
+      renderCell: (params) => <span>esta es una descripcion generica</span>,
     },
     {
       field: 'createdAt',
@@ -160,7 +156,7 @@ export function ProductListView() {
     {
       field: 'inventoryType',
       headerName: 'Stock',
-      width: 160,
+      width: 120,
       type: 'singleSelect',
       valueOptions: PRODUCT_STOCK_OPTIONS,
       renderCell: (params) => <RenderCellStock params={params} />,
@@ -186,9 +182,9 @@ export function ProductListView() {
       type: 'actions',
       field: 'actions',
       headerName: ' ',
-      align: 'right',
-      headerAlign: 'right',
-      width: 80,
+      align: 'center',
+      headerAlign: 'center',
+      width: 40,
       sortable: false,
       filterable: false,
       disableColumnMenu: true,
@@ -320,7 +316,7 @@ function CustomToolbar({
       <GridToolbarContainer>
         <ProductTableToolbar
           filters={filters}
-          options={{ stocks: PRODUCT_STOCK_OPTIONS, publishs: PUBLISH_OPTIONS }}
+          options={{ stocks: PRODUCT_STOCK_OPTIONS }}
         />
 
         <GridToolbarQuickFilter />
@@ -361,14 +357,10 @@ function CustomToolbar({
 }
 
 function applyFilter({ inputData, filters }) {
-  const { stock, publish } = filters;
+  const { stock } = filters;
 
   if (stock.length) {
     inputData = inputData.filter((product) => stock.includes(product.inventoryType));
-  }
-
-  if (publish.length) {
-    inputData = inputData.filter((product) => publish.includes(product.publish));
   }
 
   return inputData;

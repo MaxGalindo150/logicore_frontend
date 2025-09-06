@@ -22,7 +22,6 @@ export function ProductTableToolbar({ filters, options }) {
 
   const local = useSetState({
     stock: filters.state.stock,
-    publish: filters.state.publish,
   });
 
   const handleChangeStock = useCallback(
@@ -36,24 +35,11 @@ export function ProductTableToolbar({ filters, options }) {
     [local]
   );
 
-  const handleChangePublish = useCallback(
-    (event) => {
-      const {
-        target: { value },
-      } = event;
-
-      local.setState({ publish: typeof value === 'string' ? value.split(',') : value });
-    },
-    [local]
-  );
 
   const handleFilterStock = useCallback(() => {
     filters.setState({ stock: local.state.stock });
   }, [filters, local.state.stock]);
 
-  const handleFilterPublish = useCallback(() => {
-    filters.setState({ publish: local.state.publish });
-  }, [filters, local.state.publish]);
 
   return (
     <>
@@ -95,45 +81,6 @@ export function ProductTableToolbar({ filters, options }) {
         </Select>
       </FormControl>
 
-      <FormControl sx={{ flexShrink: 0, width: { xs: 1, md: 200 } }}>
-        <InputLabel htmlFor="product-filter-publish-select-label">Publish</InputLabel>
-        <Select
-          multiple
-          value={local.state.publish}
-          onChange={handleChangePublish}
-          onClose={handleFilterPublish}
-          input={<OutlinedInput label="Publish" />}
-          renderValue={(selected) => selected.map((value) => value).join(', ')}
-          inputProps={{ id: 'product-filter-publish-select-label' }}
-          sx={{ textTransform: 'capitalize' }}
-        >
-          {options.publishs.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              <Checkbox
-                disableRipple
-                size="small"
-                checked={local.state.publish.includes(option.value)}
-              />
-              {option.label}
-            </MenuItem>
-          ))}
-
-          <MenuItem
-            disableGutters
-            disableTouchRipple
-            onClick={handleFilterPublish}
-            sx={{
-              justifyContent: 'center',
-              fontWeight: (theme) => theme.typography.button,
-              border: (theme) =>
-                `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.16)}`,
-              bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
-            }}
-          >
-            Apply
-          </MenuItem>
-        </Select>
-      </FormControl>
 
       <CustomPopover
         open={popover.open}
