@@ -1,6 +1,6 @@
 import { CONFIG } from 'src/config-global';
 
-import { OverviewAnalyticsView } from 'src/sections/overview/analytics/view';
+import { OverviewAnalyticsView } from 'src/sections/analytics/view';
 
 // ----------------------------------------------------------------------
 
