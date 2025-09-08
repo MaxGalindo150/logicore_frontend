@@ -71,7 +71,18 @@ export function CenteredSignInView() {
       await signInWithPassword({ email: data.email, password: data.password });
       await checkUserSession?.();
 
-      router.push(paths.dashboard.root)
+      // Obtener el usuario para determinar la redirección
+      const mockUser = sessionStorage.getItem('mockUser');
+      if (mockUser) {
+        const user = JSON.parse(mockUser);
+        if (user.role === 'operator') {
+          router.push(paths.dashboard.operator);
+        } else {
+          router.push(paths.dashboard.root);
+        }
+      } else {
+        router.push(paths.dashboard.root);
+      }
     } catch (error) {
       console.error(error);
       setErrorMsg(error instanceof Error ? error.message : error);
@@ -150,9 +161,19 @@ export function CenteredSignInView() {
       {renderHead}
 
       <Alert severity="info" sx={{ mb: 3 }}>
-        Use el correo <strong>{defaultValues.email}</strong>
+        {/* que puedan probar vista operador o cliente
+        'cliente@logicore.mx': '@cliente123',
+        'operador@logicore.mx': '@operador123',
+        */}
+        Para probar la aplicación, use alguna de estas cuentas:
+        <br />
+        <strong>Cliente:</strong> <code>cliente@logicore.mx</code>
         {' con la contraseña '}
-        <strong>{defaultValues.password}</strong>
+        <code>@cliente123</code>
+        <br />
+        <strong>Operador:</strong> <code>operador@logicore.mx</code>
+        {' con la contraseña '}
+        <code>@operador123</code>
       </Alert>
 
       {!!errorMsg && (
