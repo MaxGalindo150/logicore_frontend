@@ -18,7 +18,7 @@ import { ConfirmDialog } from 'src/components/custom-dialog';
 
 // ----------------------------------------------------------------------
 
-export function ClientTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow, onViewProducts }) {
+export function ClientTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow, onViewProducts, onViewOrders }) {
   const confirm = useBoolean();
 
   const statusColor = {
@@ -102,6 +102,15 @@ export function ClientTableRow({ row, selected, onEditRow, onSelectRow, onDelete
                 onClick={onViewProducts}
               >
                 <Iconify icon="solar:box-bold" />
+              </IconButton>
+            </Tooltip>
+
+            <Tooltip title="Ver órdenes" placement="top" arrow>
+              <IconButton
+                color="primary"
+                onClick={onViewOrders}
+              >
+                <Iconify icon="solar:clipboard-list-bold" />
               </IconButton>
             </Tooltip>
 

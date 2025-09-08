@@ -57,7 +57,7 @@ const TABLE_HEAD = [
   { id: 'productsStored', label: 'Productos', width: 120 },
   { id: 'storageVolume', label: 'Volumen (m³)', width: 150 },
   { id: 'status', label: 'Estado', width: 100 },
-  { id: '', width: 130 },
+  { id: '', width: 170 },
 ];
 
 // ----------------------------------------------------------------------
@@ -120,6 +120,13 @@ export function ClientListView() {
   const handleViewProducts = useCallback(
     (id) => {
       router.push(paths.operator.clients.products(id));
+    },
+    [router]
+  );
+
+  const handleViewOrders = useCallback(
+    (id) => {
+      router.push(paths.operator.clients.orders(id));
     },
     [router]
   );
@@ -269,6 +276,7 @@ export function ClientListView() {
                         onDeleteRow={() => handleDeleteRow(row.id)}
                         onEditRow={() => handleEditRow(row.id)}
                         onViewProducts={() => handleViewProducts(row.id)}
+                        onViewOrders={() => handleViewOrders(row.id)}
                       />
                     ))}
 

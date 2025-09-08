@@ -27,3 +27,5 @@ export * from './_calendar';
 export * from './_clients';
 
 export * from './_products';
+
+export * from './_orders';

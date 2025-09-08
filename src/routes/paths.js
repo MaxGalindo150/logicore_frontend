@@ -116,9 +116,11 @@ export const paths = {
       list: `${ROOTS.OPERATOR}/clients/list`,
       edit: (id) => `${ROOTS.OPERATOR}/clients/${id}/edit`,
       products: (id) => `${ROOTS.OPERATOR}/clients/${id}/products`,
+      orders: (id) => `${ROOTS.OPERATOR}/clients/${id}/orders`,
       demo: { 
         edit: `${ROOTS.OPERATOR}/clients/${MOCK_ID}/edit`,
         products: `${ROOTS.OPERATOR}/clients/${MOCK_ID}/products`,
+        orders: `${ROOTS.OPERATOR}/clients/${MOCK_ID}/orders`,
       },
     },
     products: {
@@ -127,6 +129,17 @@ export const paths = {
       list: `${ROOTS.OPERATOR}/products/list`,
       edit: (id) => `${ROOTS.OPERATOR}/products/${id}/edit`,
       demo: { edit: `${ROOTS.OPERATOR}/products/${MOCK_ID}/edit` },
+    },
+    orders: {
+      root: `${ROOTS.OPERATOR}/orders`,
+      new: `${ROOTS.OPERATOR}/orders/new`,
+      list: `${ROOTS.OPERATOR}/orders/list`,
+      details: (id) => `${ROOTS.OPERATOR}/orders/${id}`,
+      edit: (id) => `${ROOTS.OPERATOR}/orders/${id}/edit`,
+      demo: { 
+        details: `${ROOTS.OPERATOR}/orders/${MOCK_ID}`,
+        edit: `${ROOTS.OPERATOR}/orders/${MOCK_ID}/edit`,
+      },
     },
   },
   // DASHBOARD (mantener para compatibilidad)
