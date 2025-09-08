@@ -25,11 +25,22 @@ export function AuthProvider({ children }) {
       if (accessToken && isValidToken(accessToken)) {
         setSession(accessToken);
 
+        // Intentar obtener usuario mock primero
+        const mockUser = sessionStorage.getItem('mockUser');
+        if (mockUser) {
+          const user = JSON.parse(mockUser);
+          setState({ user: { ...user, accessToken }, loading: false });
+          return;
+        }
+
+        // Si no hay mock, usar API real (comentado por ahora)
+        throw new Error('API real no implementada');
+        
+        /*
         const res = await axios.get(endpoints.auth.me);
-
         const { user } = res.data;
-
         setState({ user: { ...user, accessToken }, loading: false });
+        */
       } else {
         setState({ user: null, loading: false });
       }
@@ -55,7 +66,7 @@ export function AuthProvider({ children }) {
       user: state.user
         ? {
             ...state.user,
-            role: state.user?.role ?? 'admin',
+            role: state.user?.role ?? 'client',
           }
         : null,
       checkUserSession,

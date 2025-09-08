@@ -52,8 +52,8 @@ export function CenteredSignInView() {
   const password = useBoolean();
 
   const defaultValues = {
-    email: 'demo@minimals.cc',
-    password: '@demo1',
+    email: 'cliente@logicore.mx',
+    password: '@cliente123',
   };
 
   const methods = useForm({
@@ -150,8 +150,8 @@ export function CenteredSignInView() {
       {renderHead}
 
       <Alert severity="info" sx={{ mb: 3 }}>
-        Use <strong>{defaultValues.email}</strong>
-        {' with password '}
+        Use el correo <strong>{defaultValues.email}</strong>
+        {' con la contraseña '}
         <strong>{defaultValues.password}</strong>
       </Alert>
 
