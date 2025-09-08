@@ -35,6 +35,11 @@ export const operatorNavData = [
         path: paths.operator.clients.root, 
         icon: ICONS.user 
       },
+      { 
+        title: 'Productos', 
+        path: paths.operator.products.root, 
+        icon: ICONS.product 
+      },
     ],
   },
 ];

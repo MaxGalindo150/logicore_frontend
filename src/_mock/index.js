@@ -25,3 +25,5 @@ export * from './_overview';
 export * from './_calendar';
 
 export * from './_clients';
+
+export * from './_products';

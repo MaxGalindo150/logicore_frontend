@@ -115,7 +115,18 @@ export const paths = {
       new: `${ROOTS.OPERATOR}/clients/new`,
       list: `${ROOTS.OPERATOR}/clients/list`,
       edit: (id) => `${ROOTS.OPERATOR}/clients/${id}/edit`,
-      demo: { edit: `${ROOTS.OPERATOR}/clients/${MOCK_ID}/edit` },
+      products: (id) => `${ROOTS.OPERATOR}/clients/${id}/products`,
+      demo: { 
+        edit: `${ROOTS.OPERATOR}/clients/${MOCK_ID}/edit`,
+        products: `${ROOTS.OPERATOR}/clients/${MOCK_ID}/products`,
+      },
+    },
+    products: {
+      root: `${ROOTS.OPERATOR}/products`,
+      new: `${ROOTS.OPERATOR}/products/new`,
+      list: `${ROOTS.OPERATOR}/products/list`,
+      edit: (id) => `${ROOTS.OPERATOR}/products/${id}/edit`,
+      demo: { edit: `${ROOTS.OPERATOR}/products/${MOCK_ID}/edit` },
     },
   },
   // DASHBOARD (mantener para compatibilidad)
