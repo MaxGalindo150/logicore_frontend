@@ -56,7 +56,7 @@ export const ProductSchema = zod.object({
 
 // ----------------------------------------------------------------------
 
-export function ProductNewEditForm({ currentProduct }) {
+export function ProductNewEditForm({ currentProduct, prefilledClient = null }) {
   const router = useRouter();
 
   const clientOptions = useMemo(() => 
@@ -75,7 +75,9 @@ export function ProductNewEditForm({ currentProduct }) {
       description: currentProduct?.description || '',
       category: currentProduct?.category || '',
       sku: currentProduct?.sku || '',
-      clientId: currentProduct ? clientOptions.find(c => c.id === currentProduct.clientId) || null : null,
+      clientId: currentProduct 
+        ? clientOptions.find(c => c.id === currentProduct.clientId) || null 
+        : prefilledClient || null,
       length: currentProduct?.length ? String(currentProduct.length) : '',
       width: currentProduct?.width ? String(currentProduct.width) : '',
       height: currentProduct?.height ? String(currentProduct.height) : '',
@@ -86,7 +88,7 @@ export function ProductNewEditForm({ currentProduct }) {
       maxStock: currentProduct?.maxStock ? String(currentProduct.maxStock) : '',
       warehouseLocation: currentProduct?.warehouseLocation || '',
     }),
-[currentProduct, clientOptions]
+[currentProduct, clientOptions, prefilledClient]
   );
 
   const methods = useForm({

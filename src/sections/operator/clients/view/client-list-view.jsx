@@ -51,13 +51,13 @@ const STATUS_OPTIONS = [{ value: 'all', label: 'Todos' }, ...CLIENT_STATUS_OPTIO
 
 const TABLE_HEAD = [
   { id: 'clientId', label: 'ID', width: 100 },
-  { id: 'name', label: 'Cliente', width: 250 },
-  { id: 'company', label: 'Empresa', width: 220 },
+  { id: 'company', label: 'Empresa', width: 250 },
+  { id: 'name', label: 'Cliente', width: 220 },
   { id: 'phoneNumber', label: 'Teléfono', width: 180 },
   { id: 'productsStored', label: 'Productos', width: 120 },
   { id: 'storageVolume', label: 'Volumen (m³)', width: 150 },
   { id: 'status', label: 'Estado', width: 100 },
-  { id: '', width: 88 },
+  { id: '', width: 130 },
 ];
 
 // ----------------------------------------------------------------------
@@ -113,6 +113,13 @@ export function ClientListView() {
   const handleEditRow = useCallback(
     (id) => {
       router.push(paths.operator.clients.edit(id));
+    },
+    [router]
+  );
+
+  const handleViewProducts = useCallback(
+    (id) => {
+      router.push(paths.operator.clients.products(id));
     },
     [router]
   );
@@ -261,6 +268,7 @@ export function ClientListView() {
                         onSelectRow={() => table.onSelectRow(row.id)}
                         onDeleteRow={() => handleDeleteRow(row.id)}
                         onEditRow={() => handleEditRow(row.id)}
+                        onViewProducts={() => handleViewProducts(row.id)}
                       />
                     ))}
 

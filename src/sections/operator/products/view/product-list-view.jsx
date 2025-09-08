@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
@@ -62,20 +62,29 @@ const TABLE_HEAD = [
 
 // ----------------------------------------------------------------------
 
-export function ProductListView() {
+export function ProductListView({ clientFilter = null }) {
   const table = useTable();
 
   const router = useRouter();
 
   const confirm = useBoolean();
 
-  const [tableData, setTableData] = useState(_productsList);
+  const allProducts = useMemo(
+    () => clientFilter ? _productsList.filter(product => product.clientId === clientFilter) : _productsList,
+    [clientFilter]
+  );
+
+  const [tableData, setTableData] = useState(allProducts);
 
   const filters = useSetState({ 
     search: '', 
     status: 'all',
     category: 'all',
   });
+
+  useEffect(() => {
+    setTableData(allProducts);
+  }, [allProducts]);
 
   const dataFiltered = applyFilter({
     inputData: tableData,
@@ -115,6 +124,13 @@ export function ProductListView() {
   const handleEditRow = useCallback(
     (id) => {
       router.push(paths.operator.products.edit(id));
+    },
+    [router]
+  );
+
+  const handleViewClientProducts = useCallback(
+    (clientId) => {
+      router.push(paths.operator.clients.products(clientId));
     },
     [router]
   );
@@ -265,6 +281,7 @@ export function ProductListView() {
                         onSelectRow={() => table.onSelectRow(row.id)}
                         onDeleteRow={() => handleDeleteRow(row.id)}
                         onEditRow={() => handleEditRow(row.id)}
+                        onViewClientProducts={handleViewClientProducts}
                       />
                     ))}
 

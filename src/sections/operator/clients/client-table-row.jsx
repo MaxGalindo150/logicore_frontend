@@ -18,7 +18,7 @@ import { ConfirmDialog } from 'src/components/custom-dialog';
 
 // ----------------------------------------------------------------------
 
-export function ClientTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
+export function ClientTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow, onViewProducts }) {
   const confirm = useBoolean();
 
   const statusColor = {
@@ -43,11 +43,11 @@ export function ClientTableRow({ row, selected, onEditRow, onSelectRow, onDelete
             <Avatar alt={row.company}>{row.company.charAt(0).toUpperCase()}</Avatar>
 
             <Stack sx={{ typography: 'body2', flex: '1 1 auto', alignItems: 'flex-start' }}>
-              <Link color="inherit" onClick={onEditRow} sx={{ cursor: 'pointer' }}>
-                {row.name}
+              <Link color="inherit" onClick={onViewProducts} sx={{ cursor: 'pointer', fontWeight: 600 }}>
+                {row.company}
               </Link>
               <Box component="span" sx={{ color: 'text.disabled' }}>
-                {row.email}
+                {row.city}, {row.state}
               </Box>
             </Stack>
           </Stack>
@@ -55,11 +55,11 @@ export function ClientTableRow({ row, selected, onEditRow, onSelectRow, onDelete
 
         <TableCell>
           <Stack spacing={0.5}>
-            <Typography variant="body2" sx={{ fontWeight: 600 }}>
-              {row.company}
+            <Typography variant="body2">
+              {row.name}
             </Typography>
             <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-              {row.city}, {row.state}
+              {row.email}
             </Typography>
           </Stack>
         </TableCell>
@@ -96,6 +96,15 @@ export function ClientTableRow({ row, selected, onEditRow, onSelectRow, onDelete
 
         <TableCell>
           <Stack direction="row" alignItems="center" spacing={0.5}>
+            <Tooltip title="Ver productos" placement="top" arrow>
+              <IconButton
+                color="info"
+                onClick={onViewProducts}
+              >
+                <Iconify icon="solar:box-bold" />
+              </IconButton>
+            </Tooltip>
+
             <Tooltip title="Editar cliente" placement="top" arrow>
               <IconButton
                 color="default"

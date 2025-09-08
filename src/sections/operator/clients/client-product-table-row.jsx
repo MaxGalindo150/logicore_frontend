@@ -18,7 +18,7 @@ import { ConfirmDialog } from 'src/components/custom-dialog';
 
 // ----------------------------------------------------------------------
 
-export function ProductTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow, onViewClientProducts }) {
+export function ClientProductTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
   const confirm = useBoolean();
 
   const statusColor = {
@@ -64,22 +64,6 @@ export function ProductTableRow({ row, selected, onEditRow, onSelectRow, onDelet
               </Box>
             </Stack>
           </Stack>
-        </TableCell>
-
-        <TableCell>
-          <Link 
-            color="inherit" 
-            onClick={() => onViewClientProducts?.(row.clientId)} 
-            sx={{ 
-              cursor: 'pointer', 
-              fontWeight: 500,
-              '&:hover': {
-                textDecoration: 'underline',
-              }
-            }}
-          >
-            {row.clientName}
-          </Link>
         </TableCell>
 
         <TableCell>

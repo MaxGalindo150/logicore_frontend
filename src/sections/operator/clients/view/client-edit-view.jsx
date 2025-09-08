@@ -27,7 +27,7 @@ export function ClientEditView({ id }) {
         links={[
           { name: 'Panel de Control', href: paths.operator.root },
           { name: 'Clientes', href: paths.operator.clients.root },
-          { name: currentClient?.name || 'Cliente' },
+          { name: currentClient?.company || 'Cliente' },
         ]}
         sx={{ mb: { xs: 2, md: 3 } }}
       />
