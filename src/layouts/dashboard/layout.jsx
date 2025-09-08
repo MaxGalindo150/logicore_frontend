@@ -24,6 +24,9 @@ import { HeaderBase } from '../core/header-base';
 import { _workspaces } from '../config-nav-workspace';
 import { LayoutSection } from '../core/layout-section';
 import { navData as dashboardNavData } from '../config-nav-dashboard';
+import { getNavDataByRole } from '../utils/get-nav-data';
+
+import { useAuthContext } from 'src/auth/hooks';
 
 // ----------------------------------------------------------------------
 
@@ -34,11 +37,15 @@ export function DashboardLayout({ sx, children, data }) {
 
   const settings = useSettingsContext();
 
+  const { user } = useAuthContext();
+
   const navColorVars = useNavColorVars(theme, settings);
 
   const layoutQuery = 'lg';
 
-  const navData = data?.nav ?? dashboardNavData;
+  // Obtener datos de navegación según el rol del usuario
+  const defaultNavData = user?.role ? getNavDataByRole(user.role) : dashboardNavData;
+  const navData = data?.nav ?? defaultNavData;
 
   const isNavMini = settings.navLayout === 'mini';
 
