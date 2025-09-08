@@ -11,7 +11,9 @@ const MOCK_TITLE = _postTitles[2];
 const ROOTS = {
   AUTH: '/auth',
   AUTH_DEMO: '/auth-demo',
-  DASHBOARD: '/dashboard',
+  CLIENT: '/client',
+  OPERATOR: '/operator',
+  DASHBOARD: '/dashboard', // Mantener para compatibilidad
 };
 
 // ----------------------------------------------------------------------
@@ -91,7 +93,25 @@ export const paths = {
       verify: `${ROOTS.AUTH_DEMO}/centered/verify`,
     },
   },
-  // DASHBOARD
+  // CLIENT
+  client: {
+    root: ROOTS.CLIENT,
+    productos: {
+      root: `${ROOTS.CLIENT}/productos`,
+      details: (id) => `${ROOTS.CLIENT}/productos/${id}`,
+      demo: { details: `${ROOTS.CLIENT}/productos/${MOCK_ID}` },
+    },
+    ordenes: {
+      root: `${ROOTS.CLIENT}/ordenes`,
+      details: (id) => `${ROOTS.CLIENT}/ordenes/${id}`,
+      demo: { details: `${ROOTS.CLIENT}/ordenes/${MOCK_ID}` },
+    },
+  },
+  // OPERATOR
+  operator: {
+    root: ROOTS.OPERATOR,
+  },
+  // DASHBOARD (mantener para compatibilidad)
   dashboard: {
     root: ROOTS.DASHBOARD,
     operator: `${ROOTS.DASHBOARD}/operator`,

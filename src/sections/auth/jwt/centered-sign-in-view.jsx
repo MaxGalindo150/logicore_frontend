@@ -76,12 +76,12 @@ export function CenteredSignInView() {
       if (mockUser) {
         const user = JSON.parse(mockUser);
         if (user.role === 'operator') {
-          router.push(paths.dashboard.operator);
+          router.push(paths.operator.root);
         } else {
-          router.push(paths.dashboard.root);
+          router.push(paths.client.root);
         }
       } else {
-        router.push(paths.dashboard.root);
+        router.push(paths.client.root);
       }
     } catch (error) {
       console.error(error);

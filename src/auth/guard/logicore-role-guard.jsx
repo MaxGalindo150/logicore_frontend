@@ -18,11 +18,11 @@ export function LogicoreRoleGuard({ children, allowedRoles = [], redirectTo }) {
       if (!hasPermission) {
         // Redirigir según el rol del usuario
         if (user.role === 'operator') {
-          router.push(redirectTo || paths.dashboard.operator);
+          router.push(redirectTo || paths.operator.root);
         } else if (user.role === 'client') {
-          router.push(redirectTo || paths.dashboard.root);
+          router.push(redirectTo || paths.client.root);
         } else {
-          router.push(paths.dashboard.root);
+          router.push(paths.client.root);
         }
       }
     }
