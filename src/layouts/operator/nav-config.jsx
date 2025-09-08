@@ -12,6 +12,8 @@ const ICONS = {
   dashboard: icon('ic-dashboard'),
   analytics: icon('ic-analytics'),
   user: icon('ic-user'),
+  order: icon('ic-order'),
+  product: icon('ic-product'),
 };
 
 // ----------------------------------------------------------------------
@@ -27,6 +29,11 @@ export const operatorNavData = [
         title: 'Centro de Control', 
         path: paths.operator.root, 
         icon: ICONS.dashboard 
+      },
+      { 
+        title: 'Clientes', 
+        path: paths.operator.clients.root, 
+        icon: ICONS.user 
       },
     ],
   },

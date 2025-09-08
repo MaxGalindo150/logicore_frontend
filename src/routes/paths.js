@@ -110,6 +110,13 @@ export const paths = {
   // OPERATOR
   operator: {
     root: ROOTS.OPERATOR,
+    clients: {
+      root: `${ROOTS.OPERATOR}/clients`,
+      new: `${ROOTS.OPERATOR}/clients/new`,
+      list: `${ROOTS.OPERATOR}/clients/list`,
+      edit: (id) => `${ROOTS.OPERATOR}/clients/${id}/edit`,
+      demo: { edit: `${ROOTS.OPERATOR}/clients/${MOCK_ID}/edit` },
+    },
   },
   // DASHBOARD (mantener para compatibilidad)
   dashboard: {
