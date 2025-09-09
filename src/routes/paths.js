@@ -96,15 +96,15 @@ export const paths = {
   // CLIENT
   client: {
     root: ROOTS.CLIENT,
-    productos: {
-      root: `${ROOTS.CLIENT}/productos`,
-      details: (id) => `${ROOTS.CLIENT}/productos/${id}`,
-      demo: { details: `${ROOTS.CLIENT}/productos/${MOCK_ID}` },
+    products: {
+      root: `${ROOTS.CLIENT}/products`,
+      details: (id) => `${ROOTS.CLIENT}/products/${id}`,
+      demo: { details: `${ROOTS.CLIENT}/products/${MOCK_ID}` },
     },
-    ordenes: {
-      root: `${ROOTS.CLIENT}/ordenes`,
-      details: (id) => `${ROOTS.CLIENT}/ordenes/${id}`,
-      demo: { details: `${ROOTS.CLIENT}/ordenes/${MOCK_ID}` },
+    orders: {
+      root: `${ROOTS.CLIENT}/orders`,
+      details: (id) => `${ROOTS.CLIENT}/orders/${id}`,
+      demo: { details: `${ROOTS.CLIENT}/orders/${MOCK_ID}` },
     },
   },
   // OPERATOR

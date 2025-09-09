@@ -2,6 +2,7 @@ import useSWR from 'swr';
 import { useMemo } from 'react';
 
 import { fetcher, endpoints } from 'src/utils/axios';
+import { _productsList } from 'src/_mock/_products';
 
 // ----------------------------------------------------------------------
 
@@ -14,21 +15,16 @@ const swrOptions = {
 // ----------------------------------------------------------------------
 
 export function useGetProducts() {
-  const url = endpoints.product.list;
-
-  const { data, isLoading, error, isValidating } = useSWR(url, fetcher, swrOptions);
-
-  console.log(data);
-
+  // Usando datos mock temporalmente
   const memoizedValue = useMemo(
     () => ({
-      products: data?.products || [],
-      productsLoading: isLoading,
-      productsError: error,
-      productsValidating: isValidating,
-      productsEmpty: !isLoading && !data?.products.length,
+      products: _productsList || [],
+      productsLoading: false,
+      productsError: null,
+      productsValidating: false,
+      productsEmpty: !_productsList.length,
     }),
-    [data?.products, error, isLoading, isValidating]
+    []
   );
 
   return memoizedValue;

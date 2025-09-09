@@ -55,16 +55,26 @@ const PRODUCT_NAMES = [
 ];
 
 const DESCRIPTIONS = [
-  'Producto de alta calidad con garantía extendida',
-  'Ideal para uso doméstico y comercial',
-  'Tecnología avanzada y diseño moderno',
-  'Fabricado con materiales premium',
-  'Excelente relación calidad-precio',
-  'Producto importado con certificación internacional',
-  'Diseño ergonómico y funcional',
-  'Compatible con múltiples dispositivos',
-  'Resistente al agua y polvo',
-  'Producto ecológico y sustentable',
+  'Smartphone premium',
+  'Portátil para trabajo',
+  'Pantalla HD profesional',
+  'Teclado mecánico RGB',
+  'Zapatillas deportivas',
+  'Auriculares inalámbricos',
+  'Electrodoméstico eficiente',
+  'Consola de videojuegos',
+  'Mueble moderno',
+  'Producto cosmético',
+  'Repuesto vehicular',
+  'Suplemento nutricional',
+  'Alimento orgánico',
+  'Camiseta de algodón',
+  'Tablet multitáctil',
+  'Accesorio gaming',
+  'Monitor 4K',
+  'Impresora láser',
+  'Router inalámbrico',
+  'Producto de calidad',
 ];
 
 const WAREHOUSE_LOCATIONS = [
@@ -80,6 +90,7 @@ export const _productsList = PRODUCT_NAMES.map((name, index) => {
   const categoryKeys = WAREHOUSE_PRODUCT_CATEGORY_OPTIONS.map(option => option.value);
   const statusKeys = WAREHOUSE_PRODUCT_STATUS_OPTIONS.map(option => option.value);
   const unitKeys = UNIT_OPTIONS.map(option => option.value);
+  const inventoryTypes = ['in stock', 'low stock', 'out of stock'];
   
   return {
     id: _mock.id(index),
@@ -101,6 +112,7 @@ export const _productsList = PRODUCT_NAMES.map((name, index) => {
     maxStock: Math.floor(Math.random() * 500) + 200,
     warehouseLocation: WAREHOUSE_LOCATIONS[index % WAREHOUSE_LOCATIONS.length],
     status: statusKeys[index % statusKeys.length],
+    inventoryType: inventoryTypes[index % inventoryTypes.length], // Para compatibilidad con vista client
     entryDate: _mock.time(index),
     lastUpdated: _mock.time(index + 5),
     createdAt: _mock.time(index),

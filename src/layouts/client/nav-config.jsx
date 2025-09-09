@@ -27,12 +27,12 @@ export const clientNavData = [
       { title: 'Dashboard', path: paths.client.root, icon: ICONS.analytics },
       {
         title: 'Productos',
-        path: paths.client.productos.root,
+        path: paths.client.products.root,
         icon: ICONS.product,
       },
       {
         title: 'Órdenes',
-        path: paths.client.ordenes.root,
+        path: paths.client.orders.root,
         icon: ICONS.order,
       },
     ],
