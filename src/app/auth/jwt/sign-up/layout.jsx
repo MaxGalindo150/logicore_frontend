@@ -1,4 +1,4 @@
-import { AuthSplitLayout } from 'src/layouts/auth-split';
+import { AuthLayout } from 'src/layouts/auth';
 
 import { GuestGuard } from 'src/auth/guard';
 
@@ -7,7 +7,7 @@ import { GuestGuard } from 'src/auth/guard';
 export default function Layout({ children }) {
   return (
     <GuestGuard>
-      <AuthSplitLayout>{children}</AuthSplitLayout>
+      <AuthLayout>{children}</AuthLayout>
     </GuestGuard>
   );
 }
