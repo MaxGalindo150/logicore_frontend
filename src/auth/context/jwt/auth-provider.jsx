@@ -26,7 +26,7 @@ export function AuthProvider({ children }) {
         setSession(accessToken);
 
         // Intentar obtener usuario mock primero
-        const mockUser = sessionStorage.getItem('mockUser');
+        const mockUser = sessionStorage.getItem('user');
         if (mockUser) {
           const user = JSON.parse(mockUser);
           setState({ user: { ...user, accessToken }, loading: false });
@@ -39,6 +39,8 @@ export function AuthProvider({ children }) {
         const res = await axios.get(endpoints.auth.me);
         console.log('Response from me endpoint auth.me:', res);
         const { user } = res.data;
+        console.log('User data to setState:', { ...user, accessToken });
+        sessionStorage.setItem('user', JSON.stringify(user));
         setState({ user: { ...user, accessToken }, loading: false });
         
       } else {

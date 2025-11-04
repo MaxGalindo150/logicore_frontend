@@ -35,7 +35,7 @@ export const signInWithPassword = async ({ email, password }) => {
       const mockToken = `${header}.${payload}.${signature}`;
       
       // Almacenar el usuario en sessionStorage para que lo pueda leer el provider
-      sessionStorage.setItem('mockUser', JSON.stringify(user));
+      sessionStorage.setItem('user', JSON.stringify(user));
       
       setSession(mockToken);
       return;

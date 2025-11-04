@@ -72,7 +72,7 @@ export function CenteredSignInView() {
       await checkUserSession?.();
 
       // Obtener el usuario para determinar la redirección
-      const mockUser = sessionStorage.getItem('mockUser');
+      const mockUser = sessionStorage.getItem('user');
       if (mockUser) {
         const user = JSON.parse(mockUser);
         if (user.user_role === 'EMPLOYEE') {
