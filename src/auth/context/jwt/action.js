@@ -44,7 +44,7 @@ export const signInWithPassword = async ({ email, password }) => {
     // Si no es credencial mock, usar API real
     // throw new Error('Credenciales inválidas');
   
-    const params = { username: email, password }; // cambio para FastAPI (max lo pidió)
+    const params = { email, password };
     console.log('Signing in with params:', params);
     const res = await axios.post(endpoints.auth.signIn, params);
     const { accessToken } = res.data;
