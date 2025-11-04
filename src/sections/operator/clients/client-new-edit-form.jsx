@@ -16,6 +16,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
+import axios, { endpoints } from 'src/utils/axios';
 
 import { CLIENT_STATUS_OPTIONS } from 'src/_mock';
 
@@ -26,7 +27,8 @@ import { Form, Field } from 'src/components/hook-form';
 // ----------------------------------------------------------------------
 
 export const ClientSchema = zod.object({
-  name: zod.string().min(1, { message: 'Nombre del contacto es requerido!' }),
+  firstName: zod.string().min(1, { message: 'Nombre es requerido!' }),
+  lastName: zod.string().min(1, { message: 'Apellido es requerido!' }),
   email: zod
     .string()
     .min(1, { message: 'Email es requerido!' })
@@ -41,8 +43,6 @@ export const ClientSchema = zod.object({
   state: zod.string().min(1, { message: 'Estado es requerido!' }),
   zipCode: zod.string().min(1, { message: 'Código postal es requerido!' }),
   // Campos específicos de LogiCore
-  businessType: zod.string().min(1, { message: 'Giro del negocio es requerido!' }),
-  mainProducts: zod.string().min(1, { message: 'Productos principales son requeridos!' }),
   // expectedVolume: zod.string().min(1, { message: 'Volumen esperado es requerido!' }),
   // Campos opcionales
   status: zod.string(),
@@ -56,7 +56,8 @@ export function ClientNewEditForm({ currentClient }) {
   const defaultValues = useMemo(
     () => ({
       status: currentClient?.status || 'activo',
-      name: currentClient?.name || '',
+      firstName: currentClient?.firstName || '',
+      lastName: currentClient?.lastName || '',
       email: currentClient?.email || '',
       phoneNumber: currentClient?.phoneNumber || '',
       company: currentClient?.company || '',
@@ -95,13 +96,38 @@ export function ClientNewEditForm({ currentClient }) {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      if (currentClient) {
+        // Lógica para editar cliente (aún no implementada)
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        toast.success('Cliente actualizado!');
+      } else {
+        // Crear nuevo cliente
+        const payload = {
+          user: {
+            email: data.email,
+            password: '123456',
+            first_name: data.firstName,
+            last_name: data.lastName,
+            phone_number: data.phoneNumber,
+            is_active: true,
+          },
+          client: {
+            company_name: data.company,
+            address: data.address,
+          },
+        };
+
+        console.log('Sending payload:', payload);
+        const res = await axios.post(endpoints.clients.new, payload);
+        console.log('Response:', res);
+
+        toast.success('Cliente creado exitosamente!');
+      }
+
       reset();
-      toast.success(currentClient ? 'Cliente actualizado!' : 'Cliente creado exitosamente!');
       router.push(paths.operator.clients.root);
-      console.info('DATA', data);
     } catch (error) {
-      console.error(error);
+      console.error('Error saving client:', error);
       toast.error('Error al guardar cliente');
     }
   });
@@ -115,33 +141,11 @@ export function ClientNewEditForm({ currentClient }) {
           display="grid"
           gridTemplateColumns={{ xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' }}
         >
-          <Field.Text name="name" label="Nombre del contacto" />
+          <Field.Text name="firstName" label="Nombre" />
+          <Field.Text name="lastName" label="Apellido" />
           <Field.Text name="email" label="Email" />
           <Field.Text name="phoneNumber" label="Teléfono" placeholder="+52 492 123 4567" />
           <Field.Text name="company" label="Empresa / Razón Social" />
-        </Box>
-
-        <Divider sx={{ my: 2, borderStyle: 'dashed' }} />
-
-        <Typography variant="h6" sx={{ color: 'text.primary', mb: 2 }}>
-          Información del Negocio
-        </Typography>
-
-        <Box
-          rowGap={2.5}
-          columnGap={2}
-          display="grid"
-          gridTemplateColumns={{ xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' }}
-        >
-          <Field.Text name="businessType" label="Giro del negocio" />
-          {/* <Field.Text name="expectedVolume" label="Volumen esperado (m³)" /> */}
-          <Field.Text
-            name="mainProducts"
-            label="Productos principales"
-            multiline
-            rows={3}
-            sx={{ gridColumn: '1 / -1' }}
-          />
         </Box>
 
         <Divider sx={{ my: 2, borderStyle: 'dashed' }} />

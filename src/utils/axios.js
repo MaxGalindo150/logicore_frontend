@@ -55,4 +55,9 @@ export const endpoints = { // V1
     details: '/api/v1/product/details',
     search: '/api/v1/product/search',
   },
+  clients: {
+    new: '/api/v1/clients/new',
+    edit: '/api/v1/clients/edit',
+    list: '/api/v1/clients/list',
+  }, 
 };
