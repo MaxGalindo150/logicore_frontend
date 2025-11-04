@@ -28,9 +28,17 @@ export function AuthProvider({ children }) {
         // Intentar obtener usuario mock primero
         const mockUser = sessionStorage.getItem('user');
         if (mockUser) {
-          const user = JSON.parse(mockUser);
-          setState({ user: { ...user, accessToken }, loading: false });
-          return;
+          // Log raw value so we can inspect why JSON.parse might fail
+          console.log('Raw sessionStorage.user value:', mockUser, 'typeof:', typeof mockUser);
+          try {
+            const user = JSON.parse(mockUser);
+            setState({ user: { ...user, accessToken }, loading: false });
+            return;
+          } catch (parseError) {
+            // If parsing fails, remove the corrupt value and continue to the API path
+            console.warn('Failed to parse sessionStorage.user, removing corrupt value.', parseError);
+            sessionStorage.removeItem('user');
+          }
         }
 
         // Si no hay mock, usar API real (comentado por ahora)
