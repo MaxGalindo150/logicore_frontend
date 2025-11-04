@@ -39,7 +39,7 @@ export function AuthProvider({ children }) {
         const res = await axios.get(endpoints.auth.me);
         console.log('Response from me endpoint auth.me:', res);
         const { user } = res.data;
-        console.log('User data from me endpoint:', user);
+        console.log('User data from me endpoint:', {user});
         console.log('User data to setState:', { ...user, accessToken });
         sessionStorage.setItem('user', JSON.stringify(user));
         setState({ user: { ...user, accessToken }, loading: false });
