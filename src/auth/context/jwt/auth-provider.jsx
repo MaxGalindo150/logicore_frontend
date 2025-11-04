@@ -65,7 +65,7 @@ export function AuthProvider({ children }) {
       user: state.user
         ? {
             ...state.user,
-            role: state.user?.user_role ?? 'client',
+            user_role: state.user?.user_role ?? 'client',
           }
         : null,
       checkUserSession,

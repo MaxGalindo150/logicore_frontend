@@ -5,7 +5,7 @@ import { _mock } from './_mock';
 export const _carouselsMembers = [...Array(6)].map((_, index) => ({
   id: _mock.id(index),
   name: _mock.fullName(index),
-  role: _mock.user_role(index),
+  user_role: _mock.user_role(index),
   avatarUrl: _mock.image.portrait(index),
 }));
 
@@ -40,7 +40,7 @@ export const _contacts = [...Array(20)].map((_, index) => {
   return {
     id: _mock.id(index),
     status,
-    role: _mock.user_role(index),
+    user_role: _mock.user_role(index),
     email: _mock.email(index),
     name: _mock.fullName(index),
     phoneNumber: _mock.phoneNumber(index),

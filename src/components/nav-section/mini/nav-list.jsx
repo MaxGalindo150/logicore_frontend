@@ -70,9 +70,9 @@ export function NavList({ data, depth, render, cssVars, slotProps, enabledRootRe
     />
   );
 
-  // Hidden item by role
-  if (data.user_roles && slotProps?.currentRole) {
-    if (!data?.user_roles?.includes(slotProps?.currentRole)) {
+  // Hidden item by user_role
+  if (data.roles && slotProps?.currentRole) {
+    if (!data?.roles?.includes(slotProps?.currentRole)) {
       return null;
     }
   }

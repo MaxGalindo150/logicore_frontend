@@ -2,6 +2,6 @@ export * from './auth-guard';
 
 export * from './guest-guard';
 
-export * from './role-based-guard';
+export * from './user_role-based-guard';
 
-export * from './logicore-role-guard';
+export * from './logicore-user_role-guard';

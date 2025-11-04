@@ -41,7 +41,7 @@ export const _mock = {
   id: (index) => _id[index],
   time: (index) => fSub({ days: index, hours: index }),
   boolean: (index) => _booleans[index],
-  role: (index) => _roles[index],
+  user_role: (index) => _roles[index],
   // Text
   courseNames: (index) => _courseNames[index],
   fileNames: (index) => _fileNames[index],

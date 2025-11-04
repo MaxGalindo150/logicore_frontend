@@ -339,7 +339,7 @@ export const _postTitles = [
   `Space Exploration: New Frontiers and the Quest for Extraterrestrial Life`,
   `The Evolution of E-Commerce: Trends Shaping the Online Retail Landscape`,
   `Cybersecurity in the 21st Century: Protecting Data in a Digital World`,
-  `The Role of Big Data in Transforming Business Strategies`,
+  `The user_role of Big Data in Transforming Business Strategies`,
   `Genetic Engineering: Ethical Considerations and Future Prospects`,
   `Urban Farming: A Solution to Food Deserts and Urban Sustainability`,
   `The Psychology of Consumer Behavior: What Drives Our Purchasing Decisions?`,
