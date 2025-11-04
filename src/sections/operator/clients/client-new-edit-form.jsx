@@ -105,7 +105,7 @@ export function ClientNewEditForm({ currentClient }) {
         const payload = {
           user: {
             email: data.email,
-            password: '123456',
+            password: '12345678', // Contraseña por defecto, se recomienda cambiar después
             first_name: data.firstName,
             last_name: data.lastName,
             phone_number: data.phoneNumber,
