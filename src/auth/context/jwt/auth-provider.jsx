@@ -37,6 +37,7 @@ export function AuthProvider({ children }) {
         // throw new Error('API real no implementada');
         
         const res = await axios.get(endpoints.auth.me);
+        console.log('Response from me endpoint auth.me:', res);
         const { user } = res.data;
         setState({ user: { ...user, accessToken }, loading: false });
         
