@@ -45,7 +45,7 @@ export const signInWithPassword = async ({ email, password }) => {
     // throw new Error('Credenciales inválidas');
   
     const params = { email, password };
-    console.log('Signing in with params:', params);
+    console.log('Signing in with params MAX ES PUTO:', params);
     const res = await axios.post(endpoints.auth.signIn, params);
     const { accessToken } = res.data;
     if (!accessToken) {
