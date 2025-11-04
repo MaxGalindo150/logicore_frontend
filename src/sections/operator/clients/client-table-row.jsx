@@ -77,11 +77,11 @@ export function ClientTableRow({ row, selected, onEditRow, onSelectRow, onDelete
           </Stack>
         </TableCell>
 
-        <TableCell>
+        {/* <TableCell>
           <Typography variant="body2" sx={{ fontWeight: 600, color: 'info.main' }}>
             {row.storageVolume} m³
           </Typography>
-        </TableCell>
+        </TableCell> */}
 
         <TableCell>
           <Label

@@ -42,7 +42,7 @@ export function OrderDetailsView({ order }) {
               items={order?.items}
               totalWeight={order?.totalWeight}
               destination={order?.destination}
-              volume={order?.volume}
+              // volume={order?.volume}
             />
 
             <OrderDetailsHistory history={order?.history} />

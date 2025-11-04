@@ -43,7 +43,7 @@ export const ClientSchema = zod.object({
   // Campos específicos de LogiCore
   businessType: zod.string().min(1, { message: 'Giro del negocio es requerido!' }),
   mainProducts: zod.string().min(1, { message: 'Productos principales son requeridos!' }),
-  expectedVolume: zod.string().min(1, { message: 'Volumen esperado es requerido!' }),
+  // expectedVolume: zod.string().min(1, { message: 'Volumen esperado es requerido!' }),
   // Campos opcionales
   status: zod.string(),
 });
@@ -66,7 +66,7 @@ export function ClientNewEditForm({ currentClient }) {
       zipCode: currentClient?.zipCode || '',
       businessType: currentClient?.businessType || '',
       mainProducts: currentClient?.mainProductType || currentClient?.mainProducts || '',
-      expectedVolume: currentClient?.storageVolume ? String(currentClient?.storageVolume) : (currentClient?.expectedVolume || ''),
+      // expectedVolume: currentClient?.storageVolume ? String(currentClient?.storageVolume) : (currentClient?.expectedVolume || ''),
     }),
     [currentClient]
   );
@@ -134,7 +134,7 @@ export function ClientNewEditForm({ currentClient }) {
           gridTemplateColumns={{ xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' }}
         >
           <Field.Text name="businessType" label="Giro del negocio" />
-          <Field.Text name="expectedVolume" label="Volumen esperado (m³)" />
+          {/* <Field.Text name="expectedVolume" label="Volumen esperado (m³)" /> */}
           <Field.Text
             name="mainProducts"
             label="Productos principales"

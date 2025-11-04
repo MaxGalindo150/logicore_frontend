@@ -41,18 +41,18 @@ export const signInWithPassword = async ({ email, password }) => {
       return;
     }
     
-    // Si no es credencial mock, usar API real (comentado por ahora)
-    throw new Error('Credenciales inválidas');
-    
-    /*
-    const params = { email, password };
+    // Si no es credencial mock, usar API real
+    // throw new Error('Credenciales inválidas');
+  
+    const params = { username: email, password }; // cambio para FastAPI (max lo pidió)
+    console.log('Signing in with params:', params);
     const res = await axios.post(endpoints.auth.signIn, params);
     const { accessToken } = res.data;
     if (!accessToken) {
       throw new Error('Access token not found in response');
     }
     setSession(accessToken);
-    */
+    
   } catch (error) {
     console.error('Error during sign in:', error);
     throw error;

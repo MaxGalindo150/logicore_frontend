@@ -16,7 +16,7 @@ export function OrderDetailsItems({
   items = [],
   totalWeight,
   destination,
-  volume,
+  // volume,
 }) {
   const renderLogisticsInfo = (
     <Stack spacing={1.5} alignItems="flex-end" sx={{ p: 2.5, textAlign: 'right', typography: 'body2' }}>
@@ -32,12 +32,12 @@ export function OrderDetailsItems({
         </Box>
       </Stack>
 
-      <Stack direction="row">
+      {/* <Stack direction="row">
         <Box sx={{ color: 'text.secondary' }}>Volumen Estimado</Box>
         <Box sx={{ width: 160, typography: 'subtitle2', color: 'warning.main' }}>
           {volume ? `${volume} m³` : '-'}
         </Box>
-      </Stack>
+      </Stack> */}
 
       <Stack direction="row" sx={{ typography: 'subtitle1' }}>
         <div>Total Items</div>

@@ -55,7 +55,7 @@ const TABLE_HEAD = [
   { id: 'name', label: 'Cliente', width: 220 },
   { id: 'phoneNumber', label: 'Teléfono', width: 180 },
   { id: 'productsStored', label: 'Productos', width: 120 },
-  { id: 'storageVolume', label: 'Volumen (m³)', width: 150 },
+  // { id: 'storageVolume', label: 'Volumen (m³)', width: 150 },
   { id: 'status', label: 'Estado', width: 100 },
   { id: '', width: 170 },
 ];

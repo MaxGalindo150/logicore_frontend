@@ -30,29 +30,29 @@ export const fetcher = async (args) => {
 
 // ----------------------------------------------------------------------
 
-export const endpoints = {
-  chat: '/api/chat',
-  kanban: '/api/kanban',
-  calendar: '/api/calendar',
+export const endpoints = { // V1
+  chat: '/api/v1/chat',
+  kanban: '/api/v1/kanban',
+  calendar: '/api/v1/calendar',
   auth: {
-    me: '/api/auth/me',
-    signIn: '/api/auth/sign-in',
-    signUp: '/api/auth/sign-up',
+    me: '/api/v1/auth/me',
+    signIn: '/api/v1/auth/sign-in',
+    signUp: '/api/v1/auth/sign-up',
   },
   mail: {
-    list: '/api/mail/list',
-    details: '/api/mail/details',
-    labels: '/api/mail/labels',
+    list: '/api/v1/mail/list',
+    details: '/api/v1/mail/details',
+    labels: '/api/v1/mail/labels',
   },
   post: {
-    list: '/api/post/list',
-    details: '/api/post/details',
-    latest: '/api/post/latest',
-    search: '/api/post/search',
+    list: '/api/v1/post/list',
+    details: '/api/v1/post/details',
+    latest: '/api/v1/post/latest',
+    search: '/api/v1/post/search',
   },
   product: {
-    list: '/api/product/list',
-    details: '/api/product/details',
-    search: '/api/product/search',
+    list: '/api/v1/product/list',
+    details: '/api/v1/product/details',
+    search: '/api/v1/product/search',
   },
 };
