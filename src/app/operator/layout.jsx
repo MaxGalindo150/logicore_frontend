@@ -12,7 +12,7 @@ export default function Layout({ children }) {
 
   return (
     <AuthGuard>
-      <LogicoreRoleGuard allowedRoles={['operator']}>
+      <LogicoreRoleGuard allowedRoles={['EMPLOYEE']}>
         <OperatorLayout>{children}</OperatorLayout>
       </LogicoreRoleGuard>
     </AuthGuard>

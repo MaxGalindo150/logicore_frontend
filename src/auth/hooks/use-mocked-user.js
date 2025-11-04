@@ -25,7 +25,7 @@ const MOCK_USERS = {
     city: 'Zacatecas',
     zipCode: '98000',
     about: 'Empresario zacatecano especializado en distribución regional.',
-    user_role: 'client',
+    user_role: 'CLIENT',
     isPublic: true,
   },
   'operador@logicore.mx': {
@@ -40,7 +40,7 @@ const MOCK_USERS = {
     city: 'Zacatecas',
     zipCode: '98000',
     about: 'Operador de LogiCore especializado en gestión de inventarios y distribución.',
-    user_role: 'operator',
+    user_role: 'EMPLOYEE',
     isPublic: false,
   }
 };

@@ -5,9 +5,9 @@ import { operatorNavData } from '../config-nav-operator';
 
 export function getNavDataByRole(userRole) {
   switch (userRole) {
-    case 'operator':
+    case 'EMPLOYEE':
       return operatorNavData;
-    case 'client':
+    case 'CLIENT':
     case 'admin':  // Por compatibilidad
     default:
       return clientNavData;

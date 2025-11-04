@@ -17,9 +17,9 @@ export function LogicoreRoleGuard({ children, allowedRoles = [], redirectTo }) {
       
       if (!hasPermission) {
         // Redirigir según el rol del usuario
-        if (user.user_role === 'operator') {
+        if (user.user_role === 'EMPLOYEE') {
           router.push(redirectTo || paths.operator.root);
-        } else if (user.user_role === 'client') {
+        } else if (user.user_role === 'CLIENT') {
           router.push(redirectTo || paths.client.root);
         } else {
           router.push(paths.client.root);

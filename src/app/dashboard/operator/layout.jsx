@@ -4,7 +4,7 @@ import { LogicoreRoleGuard } from 'src/auth/guard';
 
 export default function OperatorLayout({ children }) {
   return (
-    <LogicoreRoleGuard allowedRoles={['operator']}>
+    <LogicoreRoleGuard allowedRoles={['EMPLOYEE']}>
       {children}
     </LogicoreRoleGuard>
   );
