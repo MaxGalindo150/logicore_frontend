@@ -75,7 +75,7 @@ export function CenteredSignInView() {
       const mockUser = sessionStorage.getItem('mockUser');
       if (mockUser) {
         const user = JSON.parse(mockUser);
-        if (user.role === 'operator') {
+        if (user.user_role === 'operator') {
           router.push(paths.operator.root);
         } else {
           router.push(paths.client.root);

@@ -13,13 +13,13 @@ export function LogicoreRoleGuard({ children, allowedRoles = [], redirectTo }) {
 
   useEffect(() => {
     if (user && allowedRoles.length > 0) {
-      const hasPermission = allowedRoles.includes(user.role);
+      const hasPermission = allowedRoles.includes(user.user_role);
       
       if (!hasPermission) {
         // Redirigir según el rol del usuario
-        if (user.role === 'operator') {
+        if (user.user_role === 'operator') {
           router.push(redirectTo || paths.operator.root);
-        } else if (user.role === 'client') {
+        } else if (user.user_role === 'client') {
           router.push(redirectTo || paths.client.root);
         } else {
           router.push(paths.client.root);
@@ -29,7 +29,7 @@ export function LogicoreRoleGuard({ children, allowedRoles = [], redirectTo }) {
   }, [user, allowedRoles, router, redirectTo]);
 
   // Si no tiene permisos, no renderizar nada mientras se hace la redirección
-  if (user && allowedRoles.length > 0 && !allowedRoles.includes(user.role)) {
+  if (user && allowedRoles.length > 0 && !allowedRoles.includes(user.user_role)) {
     return null;
   }
 

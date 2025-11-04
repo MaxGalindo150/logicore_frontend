@@ -34,13 +34,12 @@ export function AuthProvider({ children }) {
         }
 
         // Si no hay mock, usar API real (comentado por ahora)
-        throw new Error('API real no implementada');
+        // throw new Error('API real no implementada');
         
-        /*
         const res = await axios.get(endpoints.auth.me);
         const { user } = res.data;
         setState({ user: { ...user, accessToken }, loading: false });
-        */
+        
       } else {
         setState({ user: null, loading: false });
       }
@@ -66,7 +65,7 @@ export function AuthProvider({ children }) {
       user: state.user
         ? {
             ...state.user,
-            role: state.user?.role ?? 'client',
+            role: state.user?.user_role ?? 'client',
           }
         : null,
       checkUserSession,

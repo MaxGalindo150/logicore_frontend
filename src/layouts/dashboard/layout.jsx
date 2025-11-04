@@ -44,7 +44,7 @@ export function DashboardLayout({ sx, children, data }) {
   const layoutQuery = 'lg';
 
   // Obtener datos de navegación según el rol del usuario
-  const defaultNavData = user?.role ? getNavDataByRole(user.role) : dashboardNavData;
+  const defaultNavData = user?.user_role ? getNavDataByRole(user.user_role) : dashboardNavData;
   const navData = data?.nav ?? defaultNavData;
 
   const isNavMini = settings.navLayout === 'mini';
