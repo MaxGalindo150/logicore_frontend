@@ -20,9 +20,7 @@ export function ClientEditView({ id }) {
   useEffect(() => {
     const loadClient = async () => {
       try {
-        console.log('Loading client with ID:', id);
         const response = await getClientById(id);
-        console.log('API response:', response);
 
         // Verificar la estructura de la respuesta
         if (!response || !response.id) {
@@ -30,7 +28,6 @@ export function ClientEditView({ id }) {
         }
 
         const client = response;
-        console.log('Client data:', client);
 
         // Transformar los datos al formato que espera el formulario
         const transformedClient = {
@@ -47,7 +44,6 @@ export function ClientEditView({ id }) {
           status: client.estado === 'Activo' ? 'activo' : 'inactivo',
         };
 
-        console.log('Transformed client:', transformedClient);
         setCurrentClient(transformedClient);
       } catch (error) {
         console.error('Error loading client:', error);

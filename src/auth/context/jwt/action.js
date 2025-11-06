@@ -45,9 +45,7 @@ export const signInWithPassword = async ({ email, password }) => {
     // throw new Error('Credenciales inválidas');
   
     const params = { email, password };
-    console.log('Signing in with params MAX ES PUTO:', params);
     const res = await axios.post(endpoints.auth.signIn, params);
-    console.log('Response from sign in MAX ES PUTISIMOOO:', res);
     const { accessToken } = res.data;
     if (!accessToken) {
       throw new Error('Access token not found in response');

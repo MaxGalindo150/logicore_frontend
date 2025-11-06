@@ -105,9 +105,7 @@ export function ClientNewEditForm({ currentClient }) {
           address: data.address + ' CP ' + data.zipCode + ', ' + data.city + ', ' + data.state,
         };
 
-        console.log('Updating client with payload:', payload);
         const res = await updateClient(currentClient.id, payload);
-        console.log('Update response:', res);
 
         toast.success('Cliente actualizado exitosamente!');
       } else {
@@ -127,9 +125,7 @@ export function ClientNewEditForm({ currentClient }) {
           },
         };
 
-        console.log('Sending payload:', payload);
         const res = await createClient(payload);
-        console.log('Response:', res);
 
         toast.success('Cliente creado exitosamente!');
       }
