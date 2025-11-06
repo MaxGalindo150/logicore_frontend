@@ -4,9 +4,8 @@ import axios, { endpoints } from 'src/utils/axios';
 
 /* ************  Create Category **************** */
 export const createCategory = async (data) => {
-  const gymId = sessionStorage.getItem('gymId');
   try {
-    const res = await axios.post(`${endpoints.categories.create}/${gymId}`, data);
+    const res = await axios.post(`${endpoints.categories.new}`, data);
     return res.data;
   } catch (error) {
     console.error('Error creating category:', error);
@@ -16,12 +15,8 @@ export const createCategory = async (data) => {
 
 /* ************  Read Categories **************** */
 export const getCategories = async () => {
-  const gymId = sessionStorage.getItem('gymId');
-  if (!gymId) {
-    throw new Error('Gym ID is not available in session storage');
-  }
   try {
-    const res = await axios.get(`${endpoints.categories.list}/${gymId}`);
+    const res = await axios.get(`${endpoints.categories.list}`);
     return res.data;
   } catch (error) {
     console.error('Error fetching categories:', error);
@@ -29,11 +24,21 @@ export const getCategories = async () => {
   }
 };
 
+/* ************  Get Category by ID **************** */
+export const getCategoryById = async (id) => {
+  try {
+    const res = await axios.get(`${endpoints.categories.base}/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error('Error fetching category:', error);
+    throw error;
+  }
+};
+
 /* ************  Update Category **************** */
 export const updateCategory = async (id, data) => {
-  const gymId = sessionStorage.getItem('gymId');
   try {
-    const res = await axios.put(`${endpoints.categories.update}/${gymId}`, data);
+    const res = await axios.put(`${endpoints.categories.base}/${id}/edit`, data);
     return res.data;
   } catch (error) {
     console.error('Error updating category:', error);
@@ -43,12 +48,11 @@ export const updateCategory = async (id, data) => {
 
 /* ************  Delete Category **************** */
 export const deleteCategory = async (id) => {
-  const gymId = sessionStorage.getItem('gymId');
   try {
-    const res = await axios.delete(`${endpoints.categories.delete}/${gymId}?id=${id}`);
+    const res = await axios.delete(`${endpoints.categories.base}/${id}`);
     return res.data;
   } catch (error) {
     console.error('Error deleting category:', error);
     throw error;
   }
-}
+};

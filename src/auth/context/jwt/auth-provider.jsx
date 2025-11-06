@@ -45,12 +45,9 @@ export function AuthProvider({ children }) {
         // throw new Error('API real no implementada');
         
         const res = await axios.get(endpoints.auth.me);
-        console.log('Response from me endpoint auth.me:', res);
         // The API sometimes returns the user object directly as res.data
         // and sometimes nests it as res.data.user. Accept both shapes.
         const user = res.data?.user ?? res.data;
-        console.log('User data from me endpoint:', { user });
-        console.log('User data to setState:', { ...user, accessToken });
         if (user) {
           sessionStorage.setItem('user', JSON.stringify(user));
           setState({ user: { ...user, accessToken }, loading: false });

@@ -9,24 +9,22 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
 import { Field } from 'src/components/hook-form';
 import { Iconify } from 'src/components/iconify';
-import { createCategory, updateCategory, deleteCategory } from 'src/api/categories';
+import { ConfirmDialog } from 'src/components/custom-dialog';
+import { createCategory, updateCategory, deleteCategory, getCategories } from 'src/api/categories';
 import { toast } from 'src/components/snackbar';
 
 // Definir el esquema de validación con zod
 const categorySchema = zod.object({
-  id: zod.number().optional(),
-  name: zod.string().nonempty({ message: 'Title is required!' }),
+  id: zod.string().optional(),
+  name: zod.string().min(1, { message: 'El nombre es requerido!' }),
   description: zod.string().optional(),
-  durationInMonths: zod.number().min(1, { message: 'Duration must be at least 1 month' }),
-  price: zod.number().min(0.01, { message: 'Price must be greater than 0' }),
-  gymId: zod.number().optional(),
 });
 
 const formSchema = zod.object({
   items: zod.array(categorySchema),
 });
 
-const CategoriesList = ({ defaultValues }) => {
+const CategoriesList = ({ defaultValues, onCategoriesUpdate }) => {
   const methods = useForm({
     resolver: zodResolver(formSchema),
     defaultValues,
@@ -41,21 +39,57 @@ const CategoriesList = ({ defaultValues }) => {
   const { fields: formFields, append, remove } = useFieldArray({ control, name: 'items' });
 
   const [changedFields, setChangedFields] = useState({});
+  const [deleteConfirm, setDeleteConfirm] = useState({ open: false, index: null, item: null });
 
-  const handleRemove = async (index) => {
+  const handleRemoveConfirm = (index) => {
     const item = methods.getValues(`items.${index}`);
-    if (item.id) {
-      await deleteCategory(item.id);
-      toast.success('Category deleted');
+    setDeleteConfirm({ open: true, index, item });
+  };
+
+  const handleRemove = async () => {
+    const { index, item } = deleteConfirm;
+
+    if (!item?.id) {
+      remove(index);
+      setDeleteConfirm({ open: false, index: null, item: null });
+      return;
     }
-    remove(index);
+
+    try {
+      await deleteCategory(item.id);
+      remove(index);
+      toast.success('Categoría eliminada correctamente');
+
+      // Recargar las categorías para actualizar datos
+      if (onCategoriesUpdate) {
+        await onCategoriesUpdate();
+      }
+    } catch (error) {
+      console.error('Error deleting category:', error);
+
+      // Manejo específico de errores según la API
+      if (error.response?.status === 404) {
+        toast.error('La categoría no existe');
+      } else if (error.response?.status === 400) {
+        toast.error('No se puede eliminar la categoría');
+      } else if (error.response?.status === 500) {
+        // Error 500 suele ser del backend, dar más contexto
+        if (error.response?.data?.detail?.includes('constraint') ||
+            error.response?.data?.detail?.includes('reference')) {
+          toast.error('No se puede eliminar la categoría: está siendo utilizada por productos');
+        } else {
+          toast.error('Error del servidor al eliminar la categoría. Es posible que esta categoría esté en uso.');
+        }
+      } else {
+        toast.error('Error al eliminar la categoría');
+      }
+    } finally {
+      setDeleteConfirm({ open: false, index: null, item: null });
+    }
   };
 
   const handleChange = (event, index, field) => {
-    const value =
-      field === 'durationInMonths' || field === 'price'
-        ? parseFloat(event.target.value)
-        : event.target.value;
+    const value = event.target.value;
     setValue(`items[${index}].${field}`, value);
     setChangedFields((prev) => ({ ...prev, [index]: true }));
   };
@@ -64,16 +98,40 @@ const CategoriesList = ({ defaultValues }) => {
     const isValid = await trigger(`items.${index}`);
     if (isValid) {
       const item = methods.getValues(`items.${index}`);
-      if (item.id) {
-        // Editar membresía existente
-        await updateCategory(item.id, item);
-        toast.success('Category updated');
-      } else {
-        // Crear nueva membresía
-        await createCategory(item);
-        toast.success('Category created');
+      try {
+        if (item.id) {
+          // Editar categoría existente
+          await updateCategory(item.id, item);
+          toast.success('Categoría actualizada correctamente');
+        } else {
+          // Crear nueva categoría
+          await createCategory(item);
+          toast.success('Categoría creada correctamente');
+        }
+        setChangedFields((prev) => ({ ...prev, [index]: false }));
+
+        // Recargar las categorías para actualizar datos
+        if (onCategoriesUpdate) {
+          await onCategoriesUpdate();
+        }
+      } catch (error) {
+        console.error('Error saving category:', error);
+
+        // Manejo específico de errores según la API
+        if (error.response?.status === 400) {
+          if (error.response?.data?.detail?.includes('already exists')) {
+            toast.error('El nombre de la categoría ya existe');
+          } else {
+            toast.error('Datos inválidos');
+          }
+        } else if (error.response?.status === 404) {
+          toast.error('La categoría no existe');
+        } else if (error.response?.status === 500) {
+          toast.error('Error del servidor al guardar la categoría');
+        } else {
+          toast.error('Error al guardar la categoría');
+        }
       }
-      setChangedFields((prev) => ({ ...prev, [index]: false }));
     }
   };
 
@@ -81,8 +139,6 @@ const CategoriesList = ({ defaultValues }) => {
     append({
       name: '',
       description: '',
-      durationInMonths: 0,
-      price: 0,
     });
     setChangedFields((prev) => ({ ...prev, [formFields.length]: true }));
   };
@@ -97,7 +153,7 @@ const CategoriesList = ({ defaultValues }) => {
                 <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} sx={{ width: 1 }}>
                   <Field.Text
                     name={`items[${index}].name`}
-                    label="Title"
+                    label="Nombre"
                     InputLabelProps={{ shrink: true }}
                     sx={{ maxWidth: { md: 280 } }}
                     onChange={(event) => handleChange(event, index, 'name')}
@@ -107,51 +163,19 @@ const CategoriesList = ({ defaultValues }) => {
 
                   <Field.Text
                     name={`items[${index}].description`}
-                    label="Description"
+                    label="Descripción"
                     InputLabelProps={{ shrink: true }}
                     onChange={(event) => handleChange(event, index, 'description')}
-                  />
-
-                  <Field.Text
-                    type="number"
-                    name={`items[${index}].durationInMonths`}
-                    label="Duration (months)"
-                    placeholder="0"
-                    InputLabelProps={{ shrink: true }}
-                    sx={{ maxWidth: { md: 136 } }}
-                    inputProps={{
-                      style: { textAlign: 'center' },
-                    }}
-                    onChange={(event) => handleChange(event, index, 'durationInMonths')}
-                    error={!!errors.items?.[index]?.durationInMonths}
-                    helperText={errors.items?.[index]?.durationInMonths?.message}
-                  />
-
-                  <Field.Text
-                    type="number"
-                    name={`items[${index}].price`}
-                    label="Price"
-                    placeholder="0.00"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <Box sx={{ typography: 'subtitle2', color: 'text.disabled' }}>$</Box>
-                        </InputAdornment>
-                      ),
-                    }}
-                    sx={{ maxWidth: { md: 96 } }}
-                    onChange={(event) => handleChange(event, index, 'price')}
-                    error={!!errors.items?.[index]?.price}
-                    helperText={errors.items?.[index]?.price?.message}
+                    sx={{ flex: 1 }}
                   />
                   {item.id && (
-                    <Button color="error" variant="contained" onClick={() => handleRemove(index)}>
+                    <Button color="error" variant="contained" onClick={() => handleRemoveConfirm(index)}>
                       <Iconify icon="solar:trash-bin-trash-bold" />
                     </Button>
                   )}
                   {changedFields[index] && (
                     <Button color="primary" variant="contained" onClick={() => handleSave(index)}>
-                      Save
+                      Guardar
                     </Button>
                   )}
                 </Stack>
@@ -179,6 +203,23 @@ const CategoriesList = ({ defaultValues }) => {
           Agregar
         </Button>
       </Stack>
+
+      {/* Diálogo de confirmación para eliminar */}
+      <ConfirmDialog
+        open={deleteConfirm.open}
+        onClose={() => setDeleteConfirm({ open: false, index: null, item: null })}
+        title="Eliminar Categoría"
+        content={`¿Estás seguro de que deseas eliminar la categoría "${deleteConfirm.item?.name || 'Sin nombre'}"?`}
+        action={
+          <Button
+            variant="contained"
+            color="error"
+            onClick={handleRemove}
+          >
+            Eliminar
+          </Button>
+        }
+      />
     </Box>
   );
 };

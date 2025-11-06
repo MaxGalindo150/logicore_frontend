@@ -15,18 +15,19 @@ export function CategoriesView({ title = 'Categories' }) {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const data = await getCategories();
-        setCategories(data);
-      } catch (error) {
-        console.error('Failed to fetch categories:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchCategories = async () => {
+    try {
+      const response = await getCategories();
+      // API devuelve {success: true, data: [...], total: N}
+      setCategories(response.data || []);
+    } catch (error) {
+      console.error('Failed to fetch categories:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchCategories();
   }, []);
 
@@ -45,7 +46,7 @@ export function CategoriesView({ title = 'Categories' }) {
         sx={{ mb: { xs: 3, md: 5 } }}
       />
       <Box sx={{ p: 3 }}>
-        <CategoriesList defaultValues={{ items: categories }} />
+        <CategoriesList defaultValues={{ items: categories }} onCategoriesUpdate={fetchCategories} />
       </Box>
     </DashboardContent>
   );

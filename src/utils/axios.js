@@ -60,5 +60,10 @@ export const endpoints = { // V1
     new: '/api/v1/clients/new',
     list: '/api/v1/clients/list',
     delete: '/api/v1/clients/delete',
-  }, 
+  },
+  categories: {
+    base: '/api/v1/categories',
+    new: '/api/v1/categories/new',
+    list: '/api/v1/categories/list',
+  },
 };
