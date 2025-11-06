@@ -19,6 +19,9 @@
     "start:out": "npx serve@latest out -p 3033"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
@@ -39,6 +42,7 @@
     "autosuggest-highlight": "^3.3.4",
     "axios": "^1.7.2",
     "dayjs": "^1.11.11",
+    "dnd-kit": "^0.0.2",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^11.2.10",
     "i18next": "^25.4.2",

@@ -40,14 +40,16 @@ export function ClientTableRow({ row, selected, onEditRow, onSelectRow, onDelete
 
         <TableCell>
           <Stack spacing={2} direction="row" alignItems="center">
-            <Avatar alt={row.company}>{row.company.charAt(0).toUpperCase()}</Avatar>
+            <Avatar alt={row.company || 'N/A'}>
+              {(row.company || 'N/A').charAt(0).toUpperCase()}
+            </Avatar>
 
             <Stack sx={{ typography: 'body2', flex: '1 1 auto', alignItems: 'flex-start' }}>
               <Link color="inherit" onClick={onViewProducts} sx={{ cursor: 'pointer', fontWeight: 600 }}>
-                {row.company}
+                {row.company || 'N/A'}
               </Link>
               <Box component="span" sx={{ color: 'text.disabled' }}>
-                {row.city}, {row.state}
+                {row.address || 'N/A'}
               </Box>
             </Stack>
           </Stack>
@@ -56,15 +58,15 @@ export function ClientTableRow({ row, selected, onEditRow, onSelectRow, onDelete
         <TableCell>
           <Stack spacing={0.5}>
             <Typography variant="body2">
-              {row.name}
+              {row.name || 'N/A'}
             </Typography>
             <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-              {row.email}
+              {row.email || 'N/A'}
             </Typography>
           </Stack>
         </TableCell>
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.phoneNumber}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.phoneNumber || 'N/A'}</TableCell>
 
         <TableCell>
           <Stack spacing={0.5}>
@@ -76,12 +78,6 @@ export function ClientTableRow({ row, selected, onEditRow, onSelectRow, onDelete
             </Typography>
           </Stack>
         </TableCell>
-
-        {/* <TableCell>
-          <Typography variant="body2" sx={{ fontWeight: 600, color: 'info.main' }}>
-            {row.storageVolume} m³
-          </Typography>
-        </TableCell> */}
 
         <TableCell>
           <Label
@@ -139,7 +135,7 @@ export function ClientTableRow({ row, selected, onEditRow, onSelectRow, onDelete
         open={confirm.value}
         onClose={confirm.onFalse}
         title="Eliminar Cliente"
-        content={`¿Estás seguro de que deseas eliminar el cliente ${row.company}?`}
+        content={`¿Estás seguro de que deseas eliminar el cliente ${row.company || 'N/A'}?`}
         action={
           <Button variant="contained" color="error" onClick={onDeleteRow}>
             Eliminar

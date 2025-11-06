@@ -21,4 +21,7 @@ export const CONFIG = {
     skip: false,
     redirectPath: paths.dashboard.root,
   },
+  categories: {
+    root: paths.operator.categories.root,
+  },
 };

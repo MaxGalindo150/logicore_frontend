@@ -1,4 +1,4 @@
-import { _orders } from 'src/_mock/_order';
+import { _orders } from 'src/_mock/_orders';
 import { CONFIG } from 'src/config-global';
 
 import { OrderDetailsView } from 'src/sections/order/view';

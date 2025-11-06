@@ -114,7 +114,6 @@ export const _clientsList = CLIENT_NAMES.map((name, index) => ({
   state: 'Zacatecas',
   city: ['Zacatecas', 'Guadalupe', 'Fresnillo', 'Jerez', 'Río Grande'][Math.floor(Math.random() * 5)],
   address: `${['Av. López Mateos', 'Blvd. López Portillo', 'Calle Hidalgo', 'Av. González Ortega', 'Calle Tacuba'][Math.floor(Math.random() * 5)]} ${Math.floor(Math.random() * 999) + 100}`,
-  zipCode: `9800${Math.floor(Math.random() * 9)}`,
   status: ['activo', 'inactivo', 'suspendido'][Math.floor(Math.random() * 3)],
   productsStored: Math.floor(Math.random() * 50) + 1,
   mainProductType: PRODUCT_TYPES[index % PRODUCT_TYPES.length],

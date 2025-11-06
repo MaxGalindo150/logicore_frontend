@@ -16,7 +16,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
-import axios, { endpoints } from 'src/utils/axios';
+import { createClient, updateClient } from 'src/api/clients';
 
 import { CLIENT_STATUS_OPTIONS } from 'src/_mock';
 
@@ -42,8 +42,6 @@ export const ClientSchema = zod.object({
   city: zod.string().min(1, { message: 'Ciudad es requerida!' }),
   state: zod.string().min(1, { message: 'Estado es requerido!' }),
   zipCode: zod.string().min(1, { message: 'Código postal es requerido!' }),
-  // Campos específicos de LogiCore
-  // expectedVolume: zod.string().min(1, { message: 'Volumen esperado es requerido!' }),
   // Campos opcionales
   status: zod.string(),
 });
@@ -97,9 +95,21 @@ export function ClientNewEditForm({ currentClient }) {
   const onSubmit = handleSubmit(async (data) => {
     try {
       if (currentClient) {
-        // Lógica para editar cliente (aún no implementada)
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        toast.success('Cliente actualizado!');
+        // Actualizar cliente existente
+        const payload = {
+          company_name: data.company,
+          first_name: `${data.firstName}`,
+          last_name: `${data.lastName}`,
+          email: data.email,
+          phone_number: data.phoneNumber,
+          address: data.address + ' CP ' + data.zipCode + ', ' + data.city + ', ' + data.state,
+        };
+
+        console.log('Updating client with payload:', payload);
+        const res = await updateClient(currentClient.id, payload);
+        console.log('Update response:', res);
+
+        toast.success('Cliente actualizado exitosamente!');
       } else {
         // Crear nuevo cliente
         const payload = {
@@ -113,12 +123,12 @@ export function ClientNewEditForm({ currentClient }) {
           },
           client: {
             company_name: data.company,
-            address: data.address,
+            address: data.address + ' CP ' + data.zipCode + ', ' + data.city + ', ' + data.state,
           },
         };
 
         console.log('Sending payload:', payload);
-        const res = await axios.post(endpoints.clients.new, payload);
+        const res = await createClient(payload);
         console.log('Response:', res);
 
         toast.success('Cliente creado exitosamente!');

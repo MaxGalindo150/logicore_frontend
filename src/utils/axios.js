@@ -56,8 +56,9 @@ export const endpoints = { // V1
     search: '/api/v1/product/search',
   },
   clients: {
+    base: '/api/v1/clients',
     new: '/api/v1/clients/new',
-    edit: '/api/v1/clients/edit',
     list: '/api/v1/clients/list',
+    delete: '/api/v1/clients/delete',
   }, 
 };

@@ -52,8 +52,8 @@ export function CenteredSignInView() {
   const password = useBoolean();
 
   const defaultValues = {
-    email: 'cliente@logicore.mx',
-    password: '@cliente123',
+    email: 'alejoto2@example.com',
+    password: 'password123',
   };
 
   const methods = useForm({

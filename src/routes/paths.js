@@ -113,10 +113,17 @@ export const paths = {
       list: `${ROOTS.OPERATOR}/orders/list`,
       details: (id) => `${ROOTS.OPERATOR}/orders/${id}`,
       edit: (id) => `${ROOTS.OPERATOR}/orders/${id}/edit`,
-      demo: { 
+      demo: {
         details: `${ROOTS.OPERATOR}/orders/${MOCK_ID}`,
         edit: `${ROOTS.OPERATOR}/orders/${MOCK_ID}/edit`,
       },
+    },
+    categories: {
+      root: `${ROOTS.OPERATOR}/categories`,
+      new: `${ROOTS.OPERATOR}/categories/new`,
+      list: `${ROOTS.OPERATOR}/categories/list`,
+      edit: (id) => `${ROOTS.OPERATOR}/categories/${id}/edit`,
+      demo: { edit: `${ROOTS.OPERATOR}/categories/${MOCK_ID}/edit` },
     },
   },
   // DASHBOARD (mantener para compatibilidad)

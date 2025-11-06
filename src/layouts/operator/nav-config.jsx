@@ -14,6 +14,7 @@ const ICONS = {
   user: icon('ic-user'),
   order: icon('ic-order'),
   product: icon('ic-product'),
+  category: icon('ic-folder'),
 };
 
 // ----------------------------------------------------------------------
@@ -40,10 +41,15 @@ export const operatorNavData = [
         path: paths.operator.products.root, 
         icon: ICONS.product 
       },
-      { 
-        title: 'Órdenes', 
-        path: paths.operator.orders.root, 
-        icon: ICONS.order 
+      {
+        title: 'Órdenes',
+        path: paths.operator.orders.root,
+        icon: ICONS.order
+      },
+      {
+        title: 'Categorías',
+        path: paths.operator.categories.root,
+        icon: ICONS.category
       },
     ],
   },
