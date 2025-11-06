@@ -25,11 +25,11 @@ export function ClientEditView({ id }) {
         console.log('API response:', response);
 
         // Verificar la estructura de la respuesta
-        if (!response.data) {
+        if (!response || !response.id) {
           throw new Error('Respuesta inválida de la API');
         }
 
-        const client = response.data;
+        const client = response;
         console.log('Client data:', client);
 
         // Transformar los datos al formato que espera el formulario

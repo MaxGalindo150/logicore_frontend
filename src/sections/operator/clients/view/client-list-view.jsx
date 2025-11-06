@@ -77,31 +77,32 @@ export function ClientListView() {
     status: 'all'
   });
 
-  // Cargar clientes desde la API
-  useEffect(() => {
-    const loadClients = async () => {
-      try {
-        const response = await getClients();
-        const clients = response.data.map(client => ({
-          id: client.id,
-          clientId: client.display_id,
-          name: client.cliente,
-          company: client.empresa,
-          email: client.cliente_email,
-          phoneNumber: client.telefono || '',
-          address: client.direccion,
-          status: client.estado === 'Activo' ? 'activo' : 'inactivo',
-          productsStored: client.total_productos,
-        }));
-        setTableData(clients);
-      } catch (error) {
-        console.error('Error loading clients:', error);
-        toast.error('Error al cargar los clientes');
-      }
-    };
-
-    loadClients();
+  // Función para cargar clientes desde la API
+  const loadClients = useCallback(async () => {
+    try {
+      const response = await getClients();
+      const clients = response.data.map(client => ({
+        id: client.id,
+        clientId: client.display_id,
+        name: client.cliente,
+        company: client.empresa,
+        email: client.cliente_email,
+        phoneNumber: client.telefono || '',
+        address: client.direccion,
+        status: client.estado === 'Activo' ? 'activo' : 'inactivo',
+        productsStored: client.total_productos,
+      }));
+      setTableData(clients);
+    } catch (error) {
+      console.error('Error loading clients:', error);
+      toast.error('Error al cargar los clientes');
+    }
   }, []);
+
+  // Cargar clientes al montar el componente
+  useEffect(() => {
+    loadClients();
+  }, [loadClients]);
 
   const dataFiltered = applyFilter({
     inputData: tableData,
@@ -121,41 +122,41 @@ export function ClientListView() {
     async (id) => {
       try {
         await deleteClient(id);
-        const deleteRow = tableData.filter((row) => row.id !== id);
-        toast.success('Cliente eliminado correctamente');
-        setTableData(deleteRow);
-        table.onUpdatePageDeleteRow(dataInPage.length);
+        toast.success('Cliente desactivado correctamente');
+
+        // Recargar datos para reflejar el cambio de estado
+        await loadClients();
       } catch (error) {
-        console.error('Error deleting client:', error);
+        console.error('Error deactivating client:', error);
         if (error.response?.status === 404) {
           toast.error('Cliente no encontrado');
         } else if (error.response?.status === 400) {
-          toast.error('No se pudo eliminar el cliente');
+          toast.error('No se pudo desactivar el cliente');
         } else if (error.response?.status === 500) {
-          toast.error('Error del servidor al eliminar el cliente. Intente más tarde.');
+          toast.error('Error del servidor al desactivar el cliente. Intente más tarde.');
         } else {
-          toast.error('Error al eliminar el cliente');
+          toast.error('Error al desactivar el cliente');
         }
       }
     },
-    [dataInPage.length, table, tableData]
+    [loadClients]
   );
 
   const handleDeleteRows = useCallback(async () => {
     try {
       await deleteClients(table.selected);
-      const deleteRows = tableData.filter((row) => !table.selected.includes(row.id));
-      toast.success('Clientes eliminados correctamente');
-      setTableData(deleteRows);
-      table.onUpdatePageDeleteRows({
-        totalRowsInPage: dataInPage.length,
-        totalRowsFiltered: dataFiltered.length,
-      });
+      toast.success('Clientes desactivados correctamente');
+
+      // Recargar datos para reflejar los cambios de estado
+      await loadClients();
+
+      // Limpiar selección
+      table.onResetPage();
     } catch (error) {
-      console.error('Error deleting clients:', error);
-      toast.error('Error al eliminar los clientes');
+      console.error('Error deactivating clients:', error);
+      toast.error('Error al desactivar los clientes');
     }
-  }, [dataFiltered.length, dataInPage.length, table, tableData]);
+  }, [table, loadClients]);
 
   const handleEditRow = useCallback(
     (id) => {

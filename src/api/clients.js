@@ -4,9 +4,9 @@ import axios, { endpoints } from 'src/utils/axios';
 
 /* ************  Create Client **************** */
 export const createClient = async (data) => {
-  const gymId = sessionStorage.getItem('gymId');
+  
   try {
-    const res = await axios.post(`${endpoints.clients.new}/${gymId}`, data);
+    const res = await axios.post(`${endpoints.clients.new}`, data);
     return res.data;
   } catch (error) {
     console.error('Error creating client:', error);
@@ -16,12 +16,8 @@ export const createClient = async (data) => {
 
 /* ************  Read Clients **************** */
 export const getClients = async () => {
-  const gymId = sessionStorage.getItem('gymId');
-  if (!gymId) {
-    throw new Error('Gym ID is not available in session storage');
-  }
   try {
-    const res = await axios.get(`${endpoints.clients.list}/${gymId}`);
+    const res = await axios.get(`${endpoints.clients.list}`);
     return res.data;
   } catch (error) {
     console.error('Error fetching clients:', error);
@@ -31,10 +27,6 @@ export const getClients = async () => {
 
 /* ************  Get Client by ID **************** */
 export const getClientById = async (id) => {
-  const gymId = sessionStorage.getItem('gymId');
-  if (!gymId) {
-    throw new Error('Gym ID is not available in session storage');
-  }
   try {
     const res = await axios.get(`${endpoints.clients.base}/${id}`);
     return res.data;
@@ -46,9 +38,9 @@ export const getClientById = async (id) => {
 
 /* ************  Update Client **************** */
 export const updateClient = async (id, data) => {
-  const gymId = sessionStorage.getItem('gymId');
+  
   try {
-    const res = await axios.put(`${endpoints.clients.base}/${id}/edit/${gymId}`, data);
+    const res = await axios.put(`${endpoints.clients.base}/${id}/edit`, data);
     return res.data;
   } catch (error) {
     console.error('Error updating client:', error);
@@ -58,9 +50,9 @@ export const updateClient = async (id, data) => {
 
 /* ************  Delete Client **************** */
 export const deleteClient = async (id) => {
-  const gymId = sessionStorage.getItem('gymId');
+  
   try {
-    const res = await axios.delete(`${endpoints.clients.base}/${id}/${gymId}`);
+    const res = await axios.delete(`${endpoints.clients.base}/${id}`);
     return res.data;
   } catch (error) {
     console.error('Error deleting client:', error);
@@ -70,10 +62,10 @@ export const deleteClient = async (id) => {
 
 /* ************  Bulk Delete Clients **************** */
 export const deleteClients = async (ids) => {
-  const gymId = sessionStorage.getItem('gymId');
+  
   try {
     const res = await Promise.all(
-      ids.map(id => axios.delete(`${endpoints.clients.base}/${id}/${gymId}`))
+      ids.map(id => axios.delete(`${endpoints.clients.base}/${id}`))
     );
     return res.data;
   } catch (error) {

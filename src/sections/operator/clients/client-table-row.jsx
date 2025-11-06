@@ -21,6 +21,12 @@ import { ConfirmDialog } from 'src/components/custom-dialog';
 export function ClientTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow, onViewProducts, onViewOrders }) {
   const confirm = useBoolean();
 
+  // Función para truncar texto
+  const truncateText = (text, maxLength = 20) => {
+    if (!text || text === 'N/A') return text;
+    return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
+  };
+
   const statusColor = {
     activo: 'success',
     inactivo: 'error',
@@ -49,7 +55,7 @@ export function ClientTableRow({ row, selected, onEditRow, onSelectRow, onDelete
                 {row.company || 'N/A'}
               </Link>
               <Box component="span" sx={{ color: 'text.disabled' }}>
-                {row.address || 'N/A'}
+                {truncateText(row.address)}
               </Box>
             </Stack>
           </Stack>
@@ -137,7 +143,14 @@ export function ClientTableRow({ row, selected, onEditRow, onSelectRow, onDelete
         title="Eliminar Cliente"
         content={`¿Estás seguro de que deseas eliminar el cliente ${row.company || 'N/A'}?`}
         action={
-          <Button variant="contained" color="error" onClick={onDeleteRow}>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => {
+              onDeleteRow();
+              confirm.onFalse();
+            }}
+          >
             Eliminar
           </Button>
         }
